@@ -676,5 +676,22 @@ ${new Date().toLocaleString()}
       </button>
     </div>
   </div>
+  <audio id="bg-music" autoplay loop>
+  <source src="PeaceFrog.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  // Handle autoplay policy (browsers block autoplay without user interaction)
+  const audio = document.getElementById('bg-music');
+  audio.volume = 0.3; // Set volume (0.0 to 1.0)
+
+  // Try to play immediately
+  audio.play().catch(() => {
+    // If blocked, play on first user interaction
+    document.addEventListener('click', () => {
+      audio.play();
+    }, { once: true });
+  });
+</script>
 </body>
 </html>
