@@ -7,6 +7,31 @@ html, body {
   color: #e4e4e7;
 }
 
+/* Hide scrollbar but keep scrolling functional */
+body {
+  overflow-x: hidden; /* removes horizontal scrollbar */
+}
+
+/* Hide vertical scrollbar for all browsers */
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+
+body {
+  -ms-overflow-style: none;  /* Internet Explorer */
+  scrollbar-width: none;     /* Firefox */
+}
+
+.sidebar::-webkit-scrollbar,
+.main-content::-webkit-scrollbar {
+  display: none;
+}
+
+.sidebar,
+.main-content {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 .container {
   display: flex;
   height: 100vh;
