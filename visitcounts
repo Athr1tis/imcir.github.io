@@ -29,9 +29,9 @@ This portfolio now uses a hybrid storage system that stores visit counts directl
 
 ### Hidden Input Fields (in HTML)
 ```html
-<input type="hidden" id="speechy-pop-storage" value="9">
-<input type="hidden" id="marketing-plan-storage" value="4">
-<input type="hidden" id="crypto-bot-storage" value="34">
+<input type="hidden" id="speechy-pop-storage" value="0">
+<input type="hidden" id="marketing-plan-storage" value="0">
+<input type="hidden" id="crypto-bot-storage" value="0">
 ```
 
 ### Display Elements
@@ -55,9 +55,9 @@ This portfolio now uses a hybrid storage system that stores visit counts directl
 ## Manual Count Updates
 To manually set counts, update the hidden input values in the HTML:
 ```html
-<input type="hidden" id="speechy-pop-storage" value="42">
-<input type="hidden" id="marketing-plan-storage" value="15">
-<input type="hidden" id="crypto-bot-storage" value="8">
+<input type="hidden" id="speechy-pop-storage" value="0">
+<input type="hidden" id="marketing-plan-storage" value="0">
+<input type="hidden" id="crypto-bot-storage" value="0">
 ```
 
 ## Privacy
