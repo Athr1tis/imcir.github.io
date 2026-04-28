@@ -4,9 +4,17 @@
 This portfolio now uses a hybrid storage system that stores visit counts directly in the HTML file and localStorage for persistence across browsers.
 
 ## Current Visit Counts
-- **speechy-pop**: 0 visits
-- **marketing-plan**: 0 visits  
-- **crypto-bot**: 0 visits
+- **Funnelytics-automations**: 0 visits
+- **MarketCapcoin-Webscrapper-python-Seleniun**: 0 visits  
+- **n8n-Automations**: 0 visits
+- **Roblox-game-sink-in**: 0 visits  
+- **Wordpress-leads-form-to-GHL-leads-using-Zapier**: 0 visits
+
+
+
+
+
+
 
 ## How It Works
 
@@ -29,14 +37,18 @@ This portfolio now uses a hybrid storage system that stores visit counts directl
 
 ### Hidden Input Fields (in HTML)
 ```html
-<input type="hidden" id="speechy-pop-storage" value="0">
-<input type="hidden" id="marketing-plan-storage" value="0">
-<input type="hidden" id="crypto-bot-storage" value="0">
+<input type="hidden" id="Funnelytics-automations-storage" value="0">
+<input type="hidden" id="MarketCapcoin-Webscrapper-python-Seleniun-storage" value="0">
+<input type="hidden" id="n8n-Automations-storage" value="0">
+<input type="hidden" id="Roblox-game-sink-in-storage" value="0">
+<input type="hidden" id="Wordpress-leads-form-to-GHL-leads-using-Zapier-storage" value="0">
 ```
 
+
 ### Display Elements
-- **Link Counters**: `speechy-pop-count`, `marketing-plan-count`, `crypto-bot-count`
-- **Live Panel**: `speechy-pop-display`, `marketing-plan-display`, `crypto-bot-display`
+- **Link Counters**: `Funnelytics-automations-count`, `MarketCapcoin-Webscrapper-python-Seleniun-count`, `n8n-Automations-count`, `Roblox-game-sink-in-count`, `Wordpress-leads-form-to-GHL-leads-using-Zapier-count`
+- **Live Panel**: `Funnelytics-automations-display`, `MarketCapcoin-Webscrapper-python-Seleniun-display`, `n8n-Automations-display`, `Roblox-game-sink-in-display`, `Wordpress-leads-form-to-GHL-leads-using-Zapier-display`
+
 
 ## Benefits
 ✅ **HTML Storage**: Counts stored directly in the HTML file
@@ -55,11 +67,12 @@ This portfolio now uses a hybrid storage system that stores visit counts directl
 ## Manual Count Updates
 To manually set counts, update the hidden input values in the HTML:
 ```html
-<input type="hidden" id="speechy-pop-storage" value="0">
-<input type="hidden" id="marketing-plan-storage" value="0">
-<input type="hidden" id="crypto-bot-storage" value="0">
+<input type="hidden" id="Funnelytics-automations-storage" value="0">
+<input type="hidden" id="MarketCapcoin-Webscrapper-python-Seleniun-storage" value="0">
+<input type="hidden" id="n8n-Automations-storage" value="0">
+<input type="hidden" id="Roblox-game-sink-in-storage" value="0">
+<input type="hidden" id="Wordpress-leads-form-to-GHL-leads-using-Zapier-storage" value="0">
 ```
-
 ## Privacy
 - No external services required
 - Counts stored locally in HTML and browser
