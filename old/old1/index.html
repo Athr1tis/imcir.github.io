@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <title>Rica Cadavis — Portfolio</title>
+</head>
+<body>
+
+  <!-- HERO SECTION -->
+  <header class="hero">
+    <nav class="nav">
+      <div class="nav-logo">RC</div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact" class="nav-cta">Hire Me</a>
+      </div>
+    </nav>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Available for work · Philippines
+      </div>
+      <h1 class="hero-name">Rica<br><em>Cadavis</em></h1>
+      <div class="hero-titles">
+        <span>Full-Stack Developer</span>
+        <span class="sep">·</span>
+        <span>Automation Engineer</span>
+        <span class="sep">·</span>
+        <span>AI Integrations Specialist</span>
+      </div>
+      <p class="hero-tagline">I build systems that <em>think</em>, automate, and scale — so your business doesn't have to work harder.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary">View Projects</a>
+        <a href="#contact" class="btn-ghost">Get In Touch</a>
+      </div>
+    </div>
+
+    <div class="hero-avatar-wrap">
+      <div class="hero-avatar-ring"></div>
+      <img src="mypic.png" alt="Rica Cadavis" class="hero-avatar" onclick="openModal()">
+      <div class="hero-avatar-label">Click to learn more</div>
+    </div>
+
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </header>
+
+  <!-- STATS BAR -->
+  <section class="stats-bar">
+    <div class="stat">
+      <strong>20+</strong>
+      <span>Projects Delivered</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <strong>6+</strong>
+      <span>Companies Served</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <strong>4 yrs</strong>
+      <span>BS Inf. Technology</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <strong>🏆</strong>
+      <span>Best in Capstone</span>
+    </div>
+  </section>
+
+  <!-- ABOUT / SKILLS -->
+  <section id="about" class="section about-section">
+    <div class="section-label">About</div>
+    <div class="about-grid">
+      <div class="about-text">
+        <h2>Building the <em>infrastructure</em> behind modern business</h2>
+        <p>I'm Rica — a Full-Stack Developer and Automation Engineer based in the Philippines. I help businesses automate operations, integrate APIs, and build scalable web applications that deliver real ROI.</p>
+        <p>From AI chatbots and CRM automations to SaaS platforms and workflow systems — I deliver fast, efficient, and reliable solutions using modern technologies.</p>
+        <div class="about-companies">
+          <p class="companies-label">Collaborated with</p>
+          <div class="companies-list">
+            <span>NewWine</span>
+            <span>Marvelous Strategies</span>
+            <span>Victus Global</span>
+            <span>Valour Strategies</span>
+            <span>+ More</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-info">
+        <div class="info-card">
+          <div class="info-icon">📧</div>
+          <div>
+            <div class="info-label">Email</div>
+            <div class="info-value">rica.cadavis12@gmail.com</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">📱</div>
+          <div>
+            <div class="info-label">Phone</div>
+            <div class="info-value">09913028862</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">🎓</div>
+          <div>
+            <div class="info-label">Education</div>
+            <div class="info-value">BS Information Technology<br><small>ACLC College · 2020–2024</small></div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">🌐</div>
+          <div>
+            <div class="info-label">Languages</div>
+            <div class="info-value">English · Bisaya · Tagalog</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">📍</div>
+          <div>
+            <div class="info-label">Location</div>
+            <div class="info-value">Philippines</div>
+          </div>
+        </div>
+        <a href="https://www.facebook.com/profile.php?id=61577640009622" target="_blank" class="social-link">
+          <img src="fb-icon.svg" alt="Facebook" width="20"> Facebook Profile
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="section skills-section">
+    <div class="section-label">Skills & Tools</div>
+    <h2>The stack I work with</h2>
+
+    <div class="skills-grid">
+
+      <div class="skill-group">
+        <div class="skill-group-title">
+          <span class="skill-dot"></span>Languages
+        </div>
+        <div class="skill-icons">
+          <div class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">Python</div>
+          <div class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS">JavaScript</div>
+          <div class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">Java</div>
+          <div class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#">C#</div>
+          <div class="skill-chip"><img src="https://logodix.com/logo/426485.png" alt="Lua">Lua</div>
+          <div class="skill-chip"><img src="https://cdn.freebiesupply.com/logos/large/2x/kotlin-logo-png-transparent.png" alt="Kotlin">Kotlin</div>
+          <div class="skill-chip"><img src="https://www.freepnglogos.com/uploads/php-logo-png/php-logo-php-elephant-logo-vectors-download-5.png" alt="PHP">PHP</div>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">
+          <span class="skill-dot"></span>Frameworks & Web
+        </div>
+        <div class="skill-icons">
+          <div class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React">React</div>
+          <div class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js">Node.js</div>
+          <div class="skill-chip"><img src="https://thumbnail.imgbin.com/19/3/15/imgbin-responsive-web-design-html-logo-world-wide-web-3X8vwtEnAJS3ELSHaEkDNzqSt_t.jpg" alt="HTML">HTML</div>
+          <div class="skill-chip"><img src="https://p1.hiclipart.com/preview/980/312/965/html-logo-css3-javascript-web-design-css-grid-layout-html5-electric-blue-symbol-png-clipart.jpg" alt="CSS">CSS</div>
+          <div class="skill-chip"><img src="https://www.freepnglogos.com/uploads/wordpress-logo-png/wordpress-logo-png-transparent-wordpress-logo-images-pluspng-6.png" alt="WordPress">WordPress</div>
+          <div class="skill-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Ren%E2%80%99Py_Logo_6-13-6_200x307px.png" alt="Ren'Py">Ren'Py</div>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">
+          <span class="skill-dot"></span>Automation & CRM
+        </div>
+        <div class="skill-icons">
+          <div class="skill-chip"><img src="https://vectorseek.com/wp-content/uploads/2025/07/N8n-Ai-Logo-PNG-SVG-Vector.png" alt="n8n">n8n</div>
+          <div class="skill-chip"><img src="https://cdn.brandfetch.io/idK-hvK7Lv/w/200/h/200/theme/dark/icon.jpeg?c=1dxbfHSJFAPEGdCLU4o5B" alt="GoHighLevel">GoHighLevel</div>
+          <div class="skill-chip"><img src="https://images.seeklogo.com/logo-png/27/1/zapier-logo-png_seeklogo-274108.png" alt="Zapier">Zapier</div>
+          <div class="skill-chip"><img src="https://cdn-1.webcatalog.io/catalog/pabbly/pabbly-icon-filled-256.png?v=1669863995747" alt="Pabbly">Pabbly</div>
+          <div class="skill-chip"><img src="https://images.ctfassets.net/un655fb9wln6/1k5wBPhbu5kXiaYlFWgEJE/b590772959bd510e64cf230ef37bba3e/Make-Logo-RGB.svg" alt="Make">Make</div>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">
+          <span class="skill-dot"></span>AI & Dev Tools
+        </div>
+        <div class="skill-icons">
+          <div class="skill-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/5/58/Claude-ai-icon.svg" alt="Claude">Claude</div>
+          <div class="skill-chip"><img src="https://freelogopng.com/images/all_img/1681039084chatgpt-icon.png" alt="ChatGPT">ChatGPT</div>
+          <div class="skill-chip"><img src="https://brandlogos.net/wp-content/uploads/2025/04/cursor_code_editor-logo_brandlogos.net_r1yfy-512x512.png" alt="Cursor">Cursor</div>
+          <div class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VSCode">VSCode</div>
+          <div class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">Git</div>
+          <div class="skill-chip"><img src="https://www.citypng.com/public/uploads/preview/unity-round-logo-icon-png-701751694968144ebvvjhn8zq.png" alt="Unity">Unity</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="section projects-section">
+    <div class="section-label">Projects</div>
+    <h2>Selected work</h2>
+
+    <div class="projects-grid">
+
+      <div class="project-card featured">
+        <div class="project-meta">
+          <span class="project-tag">Unity · C# · PHP · WordPress</span>
+          <span class="project-star">⭐ Featured</span>
+        </div>
+        <h3>Speechy Pop</h3>
+        <p>A speech recognition application built with Unity + C# — powered by a WordPress/PHP backend with XAMPP, ngrok tunneling, and GitHub version control. Combines game engine tech with full-stack backend architecture.</p>
+        <div class="project-stack">
+          <img src="https://www.citypng.com/public/uploads/preview/unity-round-logo-icon-png-701751694968144ebvvjhn8zq.png" alt="Unity" title="Unity">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#" title="C#">
+          <img src="https://www.freepnglogos.com/uploads/wordpress-logo-png/wordpress-logo-png-transparent-wordpress-logo-images-pluspng-6.png" alt="WordPress" title="WordPress">
+          <img src="https://framalibre.org/images/logo/XAMPP.png" alt="XAMPP" title="XAMPP">
+          <img src="https://www.freepnglogos.com/uploads/php-logo-png/php-logo-php-elephant-logo-vectors-download-5.png" alt="PHP" title="PHP">
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-meta">
+          <span class="project-tag">Python · Flask · MySQL</span>
+        </div>
+        <h3>MIA (Missing In Action)</h3>
+        <p>A missing persons tracking web app using Python Flask, MySQL, Bootstrap — with XAMPP local server environment and full CRUD operations.</p>
+        <div class="project-stack">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+          <img src="https://thumbnail.imgbin.com/19/3/15/imgbin-responsive-web-design-html-logo-world-wide-web-3X8vwtEnAJS3ELSHaEkDNzqSt_t.jpg" alt="HTML">
+          <img src="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo-shadow.png" alt="Bootstrap">
+          <img src="https://e7.pngegg.com/pngimages/747/798/png-clipart-mysql-mysql.png" alt="MySQL">
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-meta">
+          <span class="project-tag">GoHighLevel · Pabbly · Zapier</span>
+        </div>
+        <h3>12-Week Marketing Plan</h3>
+        <p>End-to-end marketing automation pipeline — from lead capture to nurture sequences — built inside GoHighLevel with Pabbly and Zapier integrations.</p>
+        <div class="project-stack">
+          <img src="https://cdn.brandfetch.io/idK-hvK7Lv/w/200/h/200/theme/dark/icon.jpeg?c=1dxbfHSJFAPEGdCLU4o5B" alt="GoHighLevel">
+          <img src="https://cdn-1.webcatalog.io/catalog/pabbly/pabbly-icon-filled-256.png?v=1669863995747" alt="Pabbly">
+          <img src="https://images.seeklogo.com/logo-png/27/1/zapier-logo-png_seeklogo-274108.png" alt="Zapier">
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-meta">
+          <span class="project-tag">Python · Telegram API · AI</span>
+        </div>
+        <h3>AI Chatbot for Crypto (Telegram)</h3>
+        <p>Intelligent Telegram bot integrated with crypto data APIs — built in Python with ngrok for local development and real-time message handling.</p>
+        <div class="project-stack">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+          <img src="https://tse1.mm.bing.net/th/id/OIP.TMsvEzFQMQ2ACtseyqUxRwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Telegram">
+          <img src="https://0xdfimages.gitlab.io/img/ngrok-cover.png" alt="Ngrok">
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-meta">
+          <span class="project-tag">Unity · C#</span>
+        </div>
+        <h3>Project AnalogHorror</h3>
+        <p>An analog horror game experience developed in Unity with C# scripting — atmospheric storytelling meets interactive horror mechanics.</p>
+        <div class="project-stack">
+          <img src="https://www.citypng.com/public/uploads/preview/unity-round-logo-icon-png-701751694968144ebvvjhn8zq.png" alt="Unity">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#">
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-meta">
+          <span class="project-tag">Android Studio · Vue · OpenAI</span>
+        </div>
+        <h3>PetHealth</h3>
+        <p>Mobile pet health tracking app — Android Studio frontend with Node.js backend, Vue integration, and OpenAI API for AI-powered pet health insights.</p>
+        <div class="project-stack">
+          <img src="https://logonoid.com/images/android-studio-logo.png" alt="Android Studio">
+          <img src="https://masteringjs.io/assets/images/vue/vue-transparent.png" alt="Vue">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js">
+          <img src="https://static.vecteezy.com/system/resources/previews/022/227/351/original/openai-chatgpt-logo-icon-free-png.png" alt="OpenAI">
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- OPEN SOURCE -->
+  <section class="section oss-section">
+    <div class="section-label">Open Source</div>
+    <h2>Open source resources</h2>
+    <div class="oss-grid">
+
+      <div class="oss-card">
+        <div class="oss-icon">⚡</div>
+        <div class="oss-info">
+          <h4>Funnelytics Automations</h4>
+          <p>Automation workflows for Funnelytics pipeline management</p>
+        </div>
+        <a href="#" onclick="trackClick('Funnelytics-automations'); return false;" class="oss-link">
+          View <span class="oss-count">(visited: <span id="Funnelytics-automations-count">0</span>×)</span>
+        </a>
+      </div>
+
+      <div class="oss-card">
+        <div class="oss-icon">🐍</div>
+        <div class="oss-info">
+          <h4>MarketCap Coin Webscraper</h4>
+          <p>Python Selenium scraper for cryptocurrency market data</p>
+        </div>
+        <a href="#" onclick="trackClick('MarketCapcoin-Webscrapper-python-Seleniun'); return false;" class="oss-link">
+          View <span class="oss-count">(visited: <span id="MarketCapcoin-Webscrapper-python-Seleniun-count">0</span>×)</span>
+        </a>
+      </div>
+
+      <div class="oss-card">
+        <div class="oss-icon">🔄</div>
+        <div class="oss-info">
+          <h4>n8n Automations</h4>
+          <p>Ready-to-import n8n workflow templates</p>
+        </div>
+        <a href="#" onclick="trackClick('n8n-Automations'); return false;" class="oss-link">
+          View <span class="oss-count">(visited: <span id="n8n-Automations-count">0</span>×)</span>
+        </a>
+      </div>
+
+      <div class="oss-card">
+        <div class="oss-icon">🎮</div>
+        <div class="oss-info">
+          <h4>Roblox Game: Sink In</h4>
+          <p>Roblox Studio game project with Lua scripting</p>
+        </div>
+        <a href="#" onclick="trackClick('Roblox-game-sink-in'); return false;" class="oss-link">
+          View <span class="oss-count">(visited: <span id="Roblox-game-sink-in-count">0</span>×)</span>
+        </a>
+      </div>
+
+      <div class="oss-card">
+        <div class="oss-icon">🔗</div>
+        <div class="oss-info">
+          <h4>WordPress → GHL Leads via Zapier</h4>
+          <p>Automated lead routing from WP forms to GoHighLevel CRM</p>
+        </div>
+        <a href="#" onclick="trackClick('Wordpress-leads-form-to-GHL-leads-using-Zapier'); return false;" class="oss-link">
+          View <span class="oss-count">(visited: <span id="Wordpress-leads-form-to-GHL-leads-using-Zapier-count">0</span>×)</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section contact-section">
+    <div class="contact-inner">
+      <div class="section-label">Contact</div>
+      <h2>Let's build something together</h2>
+      <p>Ready to automate your operations, integrate your tools, or build your next product? Let's talk.</p>
+      <div class="contact-actions">
+        <a href="mailto:rica.cadavis12@gmail.com" class="btn-primary">rica.cadavis12@gmail.com</a>
+        <a href="https://www.facebook.com/profile.php?id=61577640009622" target="_blank" class="btn-ghost">Facebook →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <span>© 2024 Rica Cadavis. All rights reserved.</span>
+    <span>Built with ❤️ and ☕ · Philippines</span>
+  </footer>
+
+  <!-- AVATAR MODAL -->
+  <div id="modal" class="modal" onclick="if(event.target===this)closeModal()">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">×</button>
+      <img src="mypic.png" alt="Rica Cadavis" class="modal-avatar">
+      <h3>Rica Cadavis</h3>
+      <p>Hi! I'm a passionate Full-Stack Developer, Automation Engineer, and AI Integrations Specialist from the Philippines.<br><br>I help businesses automate operations, integrate APIs, and build scalable custom web applications. From full-stack SaaS platforms and AI chatbots to CRM automations and workflow systems — I deliver fast, efficient, and reliable solutions using React, Node.js, Python, n8n, OpenAI, and GoHighLevel.</p>
+    </div>
+  </div>
+
+  <!-- Hidden storage -->
+  <input type="hidden" id="Funnelytics-automations-storage" value="0">
+  <input type="hidden" id="MarketCapcoin-Webscrapper-python-Seleniun-storage" value="0">
+  <input type="hidden" id="n8n-Automations-storage" value="0">
+  <input type="hidden" id="Roblox-game-sink-in-storage" value="0">
+  <input type="hidden" id="Wordpress-leads-form-to-GHL-leads-using-Zapier-storage" value="0">
+
+  <script>
+    let visitCounts = {
+      'Funnelytics-automations': 0,
+      'MarketCapcoin-Webscrapper-python-Seleniun': 0,
+      'n8n-Automations': 0,
+      'Roblox-game-sink-in': 0,
+      'Wordpress-leads-form-to-GHL-leads-using-Zapier': 0,
+    };
+
+    function openModal() {
+      document.getElementById('modal').style.display = 'flex';
+    }
+    function closeModal() {
+      document.getElementById('modal').style.display = 'none';
+    }
+
+    function trackClick(project) {
+      visitCounts[project]++;
+      const el = document.getElementById(project + '-count');
+      if (el) el.textContent = visitCounts[project];
+      localStorage.setItem(project, visitCounts[project]);
+    }
+
+    window.addEventListener('load', () => {
+      Object.keys(visitCounts).forEach(p => {
+        const stored = localStorage.getItem(p);
+        if (stored) {
+          visitCounts[p] = parseInt(stored) || 0;
+          const el = document.getElementById(p + '-count');
+          if (el) el.textContent = visitCounts[p];
+        }
+      });
+    });
+
+    // Smooth nav scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
