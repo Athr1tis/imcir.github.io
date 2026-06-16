@@ -1,694 +1,593 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css.css">
-    <title>Portfolio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rica Cadavis — Portfolio</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0f1117; --surface: #161b27; --surface-alt: #1c2336;
+      --border: rgba(255,255,255,0.07); --border-hover: rgba(97,218,251,0.25);
+      --accent: #61dafb; --accent-dim: rgba(97,218,251,0.12);
+      --text-primary: #f0f0f0; --text-secondary: #8b95a8; --text-muted: #4d5566;
+      --gold: #f0b429; --green: #4ade80;
+      --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+      --sidebar-w: 280px; --transition: 0.2s ease;
+    }
+    html, body { height: 100%; background: var(--bg); color: var(--text-primary); font-family: 'Inter','Segoe UI',system-ui,-apple-system,sans-serif; font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    body { overflow-x: hidden; scrollbar-width: none; }
+    body::-webkit-scrollbar { display: none; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { display: flex; min-height: 100vh; }
+
+    /* SIDEBAR */
+    .sidebar { width: var(--sidebar-w); background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; padding: 32px 20px; gap: 20px; position: sticky; top: 0; height: 100vh; overflow-y: auto; scrollbar-width: none; flex-shrink: 0; }
+    .sidebar::-webkit-scrollbar { display: none; }
+    .sidebar-top { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+    .avatar { width: 88px; height: 88px; border-radius: 50%; object-fit: cover; object-position: center; border: 2px solid var(--accent); cursor: pointer; transition: transform var(--transition), box-shadow var(--transition); box-shadow: 0 0 0 4px var(--accent-dim); }
+    .avatar:hover { transform: scale(1.04); box-shadow: 0 0 0 6px var(--accent-dim); }
+    .sidebar-top h2 { font-size: 1.15rem; font-weight: 700; color: var(--accent); letter-spacing: 0.3px; }
+    .role { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; }
+    .location { font-size: 0.78rem; color: var(--text-muted); }
+    .sidebar-section { background: var(--surface-alt); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; transition: border-color var(--transition); }
+    .sidebar-section:hover { border-color: var(--border-hover); }
+    .sidebar-section h4 { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 2px; }
+    .contact-line { display: flex; flex-direction: column; gap: 1px; }
+    .contact-line .label { font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+    .contact-line a, .contact-line span:not(.label) { font-size: 0.8rem; color: var(--text-primary); word-break: break-all; }
+    .edu-year { font-size: 0.72rem; color: var(--accent); font-weight: 600; }
+    .edu-school { font-size: 0.88rem; color: var(--text-primary); font-weight: 600; }
+    .edu-degree { font-size: 0.78rem; color: var(--text-secondary); }
+    .edu-award { font-size: 0.78rem; color: var(--gold); font-weight: 600; margin-top: 2px; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag { background: var(--accent-dim); color: var(--accent); padding: 3px 10px; border-radius: 99px; font-size: 0.72rem; font-weight: 600; border: 1px solid rgba(97,218,251,0.2); }
+    .sidebar-social { margin-top: auto; display: flex; justify-content: center; gap: 12px; padding-top: 8px; }
+    .sidebar-social img { width: 30px; height: 30px; border-radius: 6px; opacity: 0.7; transition: opacity var(--transition), transform var(--transition); }
+    .sidebar-social img:hover { opacity: 1; transform: scale(1.1); }
+
+    /* MAIN */
+    .main-content { flex: 1; padding: 40px 48px; display: flex; flex-direction: column; gap: 28px; overflow-y: auto; scrollbar-width: none; min-width: 0; }
+    .main-content::-webkit-scrollbar { display: none; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px 32px; transition: border-color var(--transition); }
+    .card:hover { border-color: rgba(255,255,255,0.1); }
+
+    /* HERO */
+    .hero { display: flex; flex-direction: column; gap: 20px; }
+    .hero h1 { font-size: 2rem; font-weight: 800; color: var(--accent); letter-spacing: -0.02em; }
+    .hero-sub { font-size: 1.05rem; color: var(--text-secondary); max-width: 640px; line-height: 1.65; }
+    .hero-tech { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; padding-top: 4px; }
+    .hero-tech img { width: 34px; height: 34px; object-fit: contain; border-radius: 7px; background: rgba(255,255,255,0.04); padding: 4px; transition: transform var(--transition); }
+    .hero-tech img:hover { transform: scale(1.15) rotate(-4deg); }
+
+    /* STATS */
+    .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .stat-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px 16px; display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; transition: border-color var(--transition), background var(--transition); }
+    .stat-box:hover { border-color: var(--border-hover); background: var(--accent-dim); }
+    .stat-num { font-size: 1.9rem; font-weight: 800; color: var(--accent); line-height: 1; }
+    .stat-label { font-size: 0.75rem; color: var(--text-secondary); text-align: center; }
+
+    .section-title { font-size: 1rem; font-weight: 700; color: var(--text-primary); letter-spacing: 0.02em; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .section-sub { font-size: 0.85rem; color: var(--text-secondary); margin-top: -14px; margin-bottom: 18px; }
+    .count-badge { background: var(--accent-dim); color: var(--accent); font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 99px; }
+
+    /* HIRING BANNER */
+    .hiring-banner { background: linear-gradient(135deg, rgba(97,218,251,0.08) 0%, rgba(74,222,128,0.06) 100%); border: 1px solid rgba(97,218,251,0.3); border-radius: var(--radius-lg); padding: 28px 32px; display: flex; flex-direction: column; gap: 14px; position: relative; overflow: hidden; }
+    .hiring-banner::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--green)); }
+    .hiring-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(74,222,128,0.15); border: 1px solid rgba(74,222,128,0.3); color: var(--green); font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 12px; border-radius: 99px; width: fit-content; }
+    .hiring-badge::before { content: '●'; font-size: 0.6rem; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+    .hiring-banner h3 { font-size: 1.15rem; font-weight: 800; color: var(--text-primary); line-height: 1.3; }
+    .hiring-banner h3 span { color: var(--accent); }
+    .hiring-body { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.7; max-width: 720px; }
+    .hiring-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+    .hiring-chip { background: var(--surface-alt); border: 1px solid var(--border); color: var(--text-secondary); font-size: 0.75rem; padding: 4px 12px; border-radius: 99px; font-weight: 500; }
+    .hiring-chip.highlight { background: var(--accent-dim); border-color: rgba(97,218,251,0.2); color: var(--accent); }
+    .hiring-cta { display: flex; gap: 12px; margin-top: 4px; flex-wrap: wrap; }
+    .btn-primary { background: var(--accent); color: #0f1117; font-size: 0.82rem; font-weight: 700; padding: 9px 20px; border-radius: var(--radius-sm); transition: opacity var(--transition), transform var(--transition); cursor: pointer; border: none; text-decoration: none; display: inline-block; }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); text-decoration: none; color: #0f1117; }
+    .btn-secondary { background: transparent; border: 1px solid rgba(97,218,251,0.3); color: var(--accent); font-size: 0.82rem; font-weight: 600; padding: 9px 20px; border-radius: var(--radius-sm); transition: background var(--transition), transform var(--transition); cursor: pointer; text-decoration: none; display: inline-block; }
+    .btn-secondary:hover { background: var(--accent-dim); transform: translateY(-1px); text-decoration: none; }
+
+    /* TIMELINE */
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .timeline-item { display: flex; gap: 20px; position: relative; padding-bottom: 28px; }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-item:not(:last-child)::before { content: ''; position: absolute; left: 7px; top: 16px; bottom: 0; width: 1px; background: var(--border); }
+    .tl-dot { width: 15px; height: 15px; border-radius: 50%; background: var(--accent); border: 3px solid var(--surface); box-shadow: 0 0 0 2px var(--accent-dim); flex-shrink: 0; margin-top: 4px; }
+    .tl-body { flex: 1; }
+    .tl-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 2px; }
+    .tl-role { font-size: 0.95rem; font-weight: 700; color: var(--text-primary); }
+    .tl-period { font-size: 0.75rem; font-weight: 600; background: var(--accent-dim); color: var(--accent); padding: 2px 10px; border-radius: 99px; white-space: nowrap; }
+    .tl-company { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 10px; }
+    .tl-bullets { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .tl-bullets li { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.55; padding-left: 16px; position: relative; }
+    .tl-bullets li::before { content: '–'; position: absolute; left: 0; color: var(--accent); }
+    .tl-note { margin-top: 12px; background: var(--accent-dim); border-left: 2px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 10px 14px; font-size: 0.8rem; color: var(--text-secondary); line-height: 1.55; }
+    .tl-clients { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .tl-client-tag { background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--text-muted); font-size: 0.7rem; padding: 2px 8px; border-radius: 99px; }
+
+    /* TOOLS */
+    .tools-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .tool-group-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 10px; }
+    .tool-icons { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .tool-icons img { width: 32px; height: 32px; object-fit: contain; border-radius: 7px; background: rgba(255,255,255,0.04); padding: 4px; transition: transform var(--transition); }
+    .tool-icons img:hover { transform: scale(1.15) rotate(-3deg); }
+
+    /* PROJECTS single column */
+    .projects-list { display: flex; flex-direction: column; gap: 14px; }
+    .project-card { background: var(--surface-alt); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 18px 20px; display: flex; flex-direction: column; gap: 10px; transition: border-color var(--transition), transform var(--transition); }
+    .project-card:hover { border-color: var(--border-hover); transform: translateX(4px); }
+    .proj-header { display: flex; align-items: center; gap: 8px; }
+    .proj-star { color: var(--gold); font-size: 1rem; }
+    .proj-name { font-size: 0.9rem; font-weight: 700; color: var(--text-primary); }
+    .proj-desc { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.55; }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .proj-tags img { width: 24px; height: 24px; object-fit: contain; border-radius: 5px; background: rgba(255,255,255,0.04); padding: 3px; transition: transform var(--transition); }
+    .proj-tags img:hover { transform: scale(1.15); }
+
+    /* OSS */
+    .oss-list { display: flex; flex-direction: column; gap: 4px; }
+    .oss-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 11px 14px; border-radius: var(--radius-sm); border: 1px solid transparent; transition: background var(--transition), border-color var(--transition); }
+    .oss-item:hover { background: var(--accent-dim); border-color: rgba(97,218,251,0.15); }
+    .oss-name { font-size: 0.85rem; color: var(--text-primary); }
+    .oss-link { font-size: 0.78rem; color: var(--accent); white-space: nowrap; display: flex; align-items: center; gap: 6px; padding: 4px 10px; border: 1px solid rgba(97,218,251,0.2); border-radius: var(--radius-sm); background: var(--accent-dim); transition: background var(--transition); }
+    .oss-link:hover { background: rgba(97,218,251,0.2); text-decoration: none; }
+    .visit-count { color: var(--text-muted); font-size: 0.72rem; }
+
+    footer { text-align: center; font-size: 0.78rem; color: var(--text-muted); padding: 8px 0 16px; }
+
+    /* MODAL */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px; }
+    .modal-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px; max-width: 560px; width: 100%; position: relative; display: flex; flex-direction: column; align-items: center; gap: 16px; max-height: 90vh; overflow-y: auto; scrollbar-width: none; }
+    .modal-box::-webkit-scrollbar { display: none; }
+    .modal-close { position: absolute; top: 14px; right: 18px; background: none; border: none; color: var(--text-secondary); font-size: 1.6rem; cursor: pointer; line-height: 1; transition: color var(--transition); }
+    .modal-close:hover { color: var(--accent); }
+    .modal-avatar { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; object-position: center; border: 3px solid var(--accent); box-shadow: 0 0 0 6px var(--accent-dim); }
+    .modal-name { font-size: 1.2rem; font-weight: 700; color: var(--accent); }
+    .modal-bio { font-size: 0.85rem; color: var(--text-secondary); text-align: center; line-height: 1.65; }
+    .modal-mobile-info { width: 100%; display: none; flex-direction: column; gap: 12px; margin-top: 4px; }
+    .modal-info-section { background: var(--surface-alt); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 14px; }
+    .modal-info-section h4 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 6px; }
+    .modal-info-section p { font-size: 0.82rem; color: var(--text-secondary); }
+
+    /* VISIT WIDGET */
+    .vc-widget { position: fixed; bottom: 20px; right: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 14px 16px; font-size: 0.75rem; color: var(--text-secondary); z-index: 500; max-width: 210px; box-shadow: 0 4px 24px rgba(0,0,0,0.4); }
+    .vc-title { color: var(--accent); font-weight: 700; margin-bottom: 8px; font-size: 0.78rem; }
+    .vc-row { margin-bottom: 2px; }
+    .vc-row span { color: var(--accent); font-weight: 600; }
+    .vc-note { color: var(--text-muted); font-size: 0.68rem; margin-top: 8px; }
+    .toast { position: fixed; top: 20px; right: 20px; background: #1a2a1a; color: #4ade80; border: 1px solid rgba(74,222,128,0.3); padding: 10px 18px; border-radius: var(--radius-sm); font-size: 0.82rem; z-index: 9999; opacity: 0; transform: translateY(-8px); transition: opacity 0.25s ease, transform 0.25s ease; }
+    .toast-show { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 1100px) { .stats-row { grid-template-columns: repeat(2,1fr); } .tools-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 900px) {
+      .container { flex-direction: column; }
+      .sidebar { width: 100%; height: auto; position: static; flex-direction: row; align-items: center; justify-content: space-between; padding: 16px 20px; gap: 16px; border-right: none; border-bottom: 1px solid var(--border); overflow-y: visible; flex-wrap: wrap; }
+      .sidebar-top { flex-direction: row; align-items: center; text-align: left; gap: 12px; padding-bottom: 0; border-bottom: none; }
+      .sidebar-top .role, .sidebar-top .location { display: none; }
+      .sidebar-section { display: none; }
+      .sidebar-social { margin-top: 0; }
+      .modal-mobile-info { display: flex; }
+      .main-content { padding: 24px 20px; gap: 20px; }
+    }
+    @media (max-width: 640px) { .main-content { padding: 16px 14px; gap: 16px; } .card { padding: 20px 18px; } .hero h1 { font-size: 1.6rem; } .stats-row { grid-template-columns: repeat(2,1fr); gap: 10px; } .stat-num { font-size: 1.5rem; } .tools-grid { grid-template-columns: 1fr; } .oss-item { flex-direction: column; align-items: flex-start; } .vc-widget { max-width: 160px; font-size: 0.68rem; bottom: 10px; right: 10px; } }
+    @media (max-width: 400px) { .sidebar { padding: 12px 14px; } .avatar { width: 48px; height: 48px; } .sidebar-top h2 { font-size: 1rem; } }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <aside class="sidebar">
-      <img src="mypic.png" alt="Avatar" class="avatar" id="avatar-img" onclick="openAvatarModal()">
+<div class="container">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <img src="mypic.png" alt="Rica Cadavis" class="avatar" onclick="openAvatarModal()">
       <h2>Rica Cadavis</h2>
-      <p>Full-Stack Developer | Automation Engineer | AI Integrations Specialist<br>PH</p>
-      
-      <!-- Contact Information -->
-      <div class="sidebar-section">
-        <h4>📧 Contact</h4>
-        <div class="contact-info">
-          <div class="contact-line">rica.cadavis12@gmail.com</div>
-          <div class="contact-line">📱 09913028862</div>
-          <div class="contact-line">📍 Philippines</div>
-        </div>
+      <p class="role">Full-Stack Developer<br>Automation & AI Integrations Engineer</p>
+      <p class="location">📍 Butuan City, Philippines</p>
+    </div>
+    <div class="sidebar-section">
+      <h4>Contact</h4>
+      <div class="contact-line"><span class="label">Email</span><a href="mailto:rica.cadavis12@gmail.com">rica.cadavis12@gmail.com</a></div>
+      <div class="contact-line"><span class="label">Phone</span>09913028862</div>
+    </div>
+    <div class="sidebar-section">
+      <h4>Education</h4>
+      <div class="edu-year">2020 – 2024</div>
+      <div class="edu-school">ACLC College</div>
+      <div class="edu-degree">BS Information Technology</div>
+      <div class="edu-award">🏆 Best in Capstone</div>
+    </div>
+    <div class="sidebar-section">
+      <h4>Languages</h4>
+      <div class="tag-row">
+        <span class="tag">English</span><span class="tag">Bisaya</span><span class="tag">Tagalog</span>
       </div>
+    </div>
+    <div class="sidebar-section">
+      <h4>Collaborated with</h4>
+      <div class="tag-row">
+        <span class="tag">NewWine</span><span class="tag">Marvelous Strategies</span>
+        <span class="tag">Victus Global</span><span class="tag">Valour Strategies</span>
+        <span class="tag">InjectCo</span><span class="tag">DiscDoctor</span><span class="tag">Tri Estate</span>
+      </div>
+    </div>
+    <div class="sidebar-social">
+      <a href="https://www.facebook.com/profile.php?id=61577640009622" target="_blank" rel="noopener" title="Facebook">
+        <img src="fb-icon.svg" alt="Facebook">
+      </a>
+    </div>
+  </aside>
 
-      <!-- Education -->
-      <div class="sidebar-section">
-        <h4>🎓 Education</h4>
-        <div class="education-info">
-          <div class="education-year">2020-2024</div>
-          <div class="education-school">ACLC College</div>
-          <div class="education-degree">BS Information Technology</div>
-          <div class="education-award">🏆 Best in Capstone</div>
-        </div>
-      </div>
+  <!-- MAIN -->
+  <main class="main-content">
 
-      <!-- Languages -->
-      <div class="sidebar-section">
-        <h4>🌐 Languages</h4>
-        <div class="language-list">
-          <span class="lang-item">English</span>
-          <span class="lang-item">Bisaya</span>
-          <span class="lang-item">Tagalog</span>
-        </div>
+    <!-- HERO -->
+    <section class="hero card">
+      <div>
+        <h1>Rica Cadavis</h1>
+        <p class="hero-sub">5 years building full-stack systems, CRM automations, and AI integrations trusted by real businesses — every day, for years. Former manager and lead developer at NewWine, now open to the next long-term partnership.</p>
       </div>
-       <div class="sidebar-section">
-        <h4>Collaborated with 6+ companies</h4>
-        <div class="Companies list">
-          <span class="lang-item">NewWine</span>
-          <span class="lang-item">Marvelous Strategies</span>
-          <span class="lang-item">Victus Global</span>
-          <span class="lang-item">Valour Strategies<br></span>
-          <span class="lang-item">+ More</span>
-        </div>
+      <div class="hero-tech">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" title="Python" alt="Python">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" title="JavaScript" alt="JavaScript">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" title="React" alt="React">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" title="Node.js" alt="Node.js">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" title="C#" alt="C#">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" title="Java" alt="Java">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" title="PHP" alt="PHP">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Ren%E2%80%99Py_Logo_6-13-6_200x307px.png" title="Ren'Py" alt="Ren'Py">
+        <img src="https://www.citypng.com/public/uploads/preview/unity-round-logo-icon-png-701751694968144ebvvjhn8zq.png" title="Unity" alt="Unity">
+        <img src="https://logodix.com/logo/426485.png" title="Lua" alt="Lua">
+        <img src="https://cdn.freebiesupply.com/logos/large/2x/kotlin-logo-png-transparent.png" title="Kotlin" alt="Kotlin">
       </div>
+    </section>
 
-     <!-- <ul class="sidebar-links">
-        <li><a href="#">Overview</a></li>
-        <li><a href="#">Repositories</a></li>
-        <li><a href="#">Projects</a></li>
-        <li><a href="#">Packages</a></li>
-      </ul>
-      <div class="sidebar-highlights">
-        <h4>Highlights</h4>
-        <ul>
-          <li>Arctic Code Vault Contributor</li>
-          <li>GitHub Pro</li>
-        </ul>
-      </div> -->
-      <div class="sidebar-social">
-        <!--<a href="#"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub"/></a>-->
-        <a href="https://www.facebook.com/profile.php?id=61577640009622&viewas=&show_switched_toast=false&show_switched_tooltip=false&is_tour_dismissed=false&is_tour_completed=false&show_podcast_settings=false&show_community_review_changes=false&should_open_composer=false&badge_type=NEW_MEMBER&show_community_rollback_toast=false&show_community_rollback=false&show_follower_visibility_disclosure=false&bypass_exit_warning=true">
-  <img src="fb-icon.svg" alt="facebook"/>
-</a>
-    </aside>
-    <main class="main-content">
-      <section class="profile-header card">
-        <div class="header-row">
-          <h1>Rica Cadavis <!--<span class="username">(@Athr1tis)</span>--></h1>
-          <div class="badges">
-            <!--<span class="badge">Public</span>
-            <span class="badge">Pro</span>-->
-          </div>
-        </div>
-        <p>Full-Stack Developer | Automation Engineer | AI Integrations Specialist | Python, JS, Ren'Py, Unity, Java, C#</p>
-        <div class="profile-icons">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" title="Python"/>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Ren%E2%80%99Py_Logo_6-13-6_200x307px.png" alt="Renpy" title="Renpy"/>
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS" title="JS"/>
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" title="React"/>
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" title="Node.js"/>
-          <img src="https://as2.ftcdn.net/v2/jpg/02/50/30/59/1000_F_250305943_sDC6la1N1fDl3bLgfLxOkQwItIodsdMb.jpg" alt="GitHub" title="GitHub"/>
-          <img src="https://p1.hiclipart.com/preview/980/312/965/html-logo-css3-javascript-web-design-css-grid-layout-html5-electric-blue-symbol-png-clipart.jpg" alt="CSS" title="CSS"/>
-          <img src="https://thumbnail.imgbin.com/19/3/15/imgbin-responsive-web-design-html-logo-world-wide-web-3X8vwtEnAJS3ELSHaEkDNzqSt_t.jpg" alt="HTML" title="HTML"/>
-          <img src="https://www.citypng.com/public/uploads/preview/unity-round-logo-icon-png-701751694968144ebvvjhn8zq.png" alt="Unity" title="Unity"/>
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" title="Java"/>
-          <img src="https://www.freepnglogos.com/uploads/php-logo-png/php-logo-php-elephant-logo-vectors-download-5.png" alt="PHP" title="PHP" />
-          <img src="https://www.freepnglogos.com/uploads/wordpress-logo-png/wordpress-logo-png-transparent-wordpress-logo-images-pluspng-6.png" alt="Wordpress" title="Wordpress" />
-          <img src="https://logodix.com/logo/426485.png" alt="Lua" title="Lua"/>
-          <img src="https://cdn.freebiesupply.com/logos/large/2x/kotlin-logo-png-transparent.png" alt="Kotlin" title="Kotlin"/>
-        </div>
-      </section>
-      <section class="profile-stats-row">
-        <div class="stats-card card">
-          <h3>Most Used Tools</h3>
-          <div class="tools-icons">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VSCode" title="VSCode"/>
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" title="Git"/>
-            <img src="https://as2.ftcdn.net/v2/jpg/02/50/30/59/1000_F_250305943_sDC6la1N1fDl3bLgfLxOkQwItIodsdMb.jpg" alt="GitHub" title="GitHub"/>
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" title="Node.js"/>
-            <img src="https://brandlogos.net/wp-content/uploads/2025/04/cursor_code_editor-logo_brandlogos.net_r1yfy-512x512.png" alt="Cursor" title="Cursor"/>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Ren%E2%80%99Py_Logo_6-13-6_200x307px.png" alt="Renpy" title="Renpy"/>
-            <img src="https://vectorseek.com/wp-content/uploads/2025/07/N8n-Ai-Logo-PNG-SVG-Vector.png" alt="n8n" title="n8n"/>
-            <img src="https://cdn.brandfetch.io/idK-hvK7Lv/w/200/h/200/theme/dark/icon.jpeg?c=1dxbfHSJFAPEGdCLU4o5B" alt="GoHighLevel" title="GoHighLevel"/>
-            <img src="https://images.seeklogo.com/logo-png/27/1/zapier-logo-png_seeklogo-274108.png" alt="Zapier" title="Zapier"/>
-            <img src="https://cdn-1.webcatalog.io/catalog/pabbly/pabbly-icon-filled-256.png?v=1669863995747" alt="Pabbly" title="Pabbly"/>
-            <img src="https://images.ctfassets.net/un655fb9wln6/1k5wBPhbu5kXiaYlFWgEJE/b590772959bd510e64cf230ef37bba3e/Make-Logo-RGB.svg" alt="Make" title="Make"/>
-            <img src="https://www.freepnglogos.com/uploads/wordpress-logo-png/wordpress-logo-png-transparent-wordpress-logo-images-pluspng-6.png" alt="Wordpress" title="Wordpress"/>
-            <img src="https://www.citypng.com/public/uploads/preview/unity-round-logo-icon-png-701751694968144ebvvjhn8zq.png" alt="Unity" title="Unity"/>
-          </div>
-        </div>
-        <div class="stats-card card">
-            <h3>Other Related Tools</h3>
-            <div class="tools-icons">
-              <img src="https://www.pngmart.com/files/23/Blender-Logo-Transparent-PNG.png" alt="Blender" title="Blender"/>
-              <img src="https://saasboltons.com/wp-content/uploads/listing-uploads/logo/2023/10/Untitled-design-1.gif" alt="Closebot" title="Closebot"/>
-              <img src="https://gpng.net/wp-content/uploads/Capcut-Logo-Png-Icon-Free.png" alt="CapCut" title="CapCut"/>
-              <img src="https://logonoid.com/images/android-studio-logo.png" alt="Android Studio" title="Android Studio"/>
-              <img src="https://tse2.mm.bing.net/th/id/OIP.7Hpz0RHbNXJUPXNKuSHOtwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Roblox Studio" title="Roblox Studio"/>
+    <!-- STATS -->
+    <section class="stats-row">
+      <div class="stat-box"><span class="stat-num">5+</span><span class="stat-label">Years of experience</span></div>
+      <div class="stat-box"><span class="stat-num">3</span><span class="stat-label">Years with NewWine</span></div>
+      <div class="stat-box"><span class="stat-num">7+</span><span class="stat-label">Companies served</span></div>
+      <div class="stat-box"><span class="stat-num">20+</span><span class="stat-label">Projects delivered</span></div>
+    </section>
+
+    <!-- OPEN TO WORK BANNER -->
+    <section class="hiring-banner">
+      <div class="hiring-badge">Open to Work</div>
+      <h3>Looking for a <span>Full-Time, Long-Term Opportunity</span></h3>
+      <p class="hiring-body">
+        I'm a full-stack developer and automation engineer with a track record of being trusted by real businesses for years — not just delivering projects, but becoming the person clients rely on to keep their systems running, growing, and profitable. I served as manager and lead developer at NewWine, handling everything from credentials and database architecture to client communication, deployment, and cross-platform integrations.
+        <br><br>
+        I'm now looking to bring that same reliability, initiative, and genuine care to a new company. Whether you need someone to build and maintain your SaaS platform, automate your marketing and CRM pipelines, integrate AI into your workflows, or simply be the technical backbone of your business operations — I'm here for it.
+        <br><br>
+        I'm not a one-off freelancer. I want to understand your business, earn your trust, and help you build something that lasts. I show up, I communicate, I take ownership, and I make sure the things I build keep working long after launch.
+      </p>
+      <div class="hiring-chips">
+        <span class="hiring-chip highlight">Full-Time</span>
+        <span class="hiring-chip highlight">Long-Term</span>
+        <span class="hiring-chip">Remote-Ready</span>
+        <span class="hiring-chip">SaaS Development</span>
+        <span class="hiring-chip">CRM Automation</span>
+        <span class="hiring-chip">AI Integration</span>
+        <span class="hiring-chip">Marketing Tech</span>
+        <span class="hiring-chip">Full-Stack Dev</span>
+        <span class="hiring-chip">Business Automation</span>
+        <span class="hiring-chip">System Architecture</span>
+      </div>
+      <div class="hiring-cta">
+        <a href="mailto:rica.cadavis12@gmail.com" class="btn-primary">📩 Contact Me Directly</a>
+        <a href="https://www.facebook.com/profile.php?id=61577640009622" target="_blank" class="btn-secondary">Connect on Facebook</a>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="card">
+      <h3 class="section-title">Experience</h3>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <div class="tl-header">
+              <span class="tl-role">Manager & Full-Stack Developer / Automation Engineer</span>
+              <span class="tl-period">3 Years</span>
+            </div>
+            <div class="tl-company">NewWine — Business Automation & Full-Stack Integration Agency</div>
+            <ul class="tl-bullets">
+              <li>NewWine is an agency specializing in business automation, full-stack development, and third-party integrations — connecting client CRMs, APIs, porting numbers, and platforms into seamless, revenue-driving systems built around what clients actually need.</li>
+              <li>Served as manager and lead developer, overseeing full project delivery, client communication, credential management, database integrity, and the reliability of all running automation pipelines.</li>
+              <li>Built and maintained production automation workflows connecting CRMs, APIs, and third-party services — trusted by clients to run every single day without failure, actively reducing their manual workload and operational costs.</li>
+              <li>Integrated external credentials, OAuth flows, and porting numbers with GoHighLevel, Zapier, n8n, and Make.com — building end-to-end business pipelines precisely scoped and executed according to each client's requirements.</li>
+              <li>Entrusted by both the company and clients to safeguard sensitive credentials, architect reliable data flows, and deliver projects that run stably in production long after handoff.</li>
+            </ul>
+            <div class="tl-note">
+              🏢 Through NewWine, successfully served 7+ companies — fully automating their internal operations, marketing funnels, and client pipelines using n8n, Make, GHL, Prospyr, Zapier, and more. Every system is still running.
+            </div>
+            <div class="tl-clients">
+              <span class="tl-client-tag">NewWine</span><span class="tl-client-tag">Marvelous Strategies</span>
+              <span class="tl-client-tag">Victus Global</span><span class="tl-client-tag">Valour Strategies</span>
+              <span class="tl-client-tag">InjectCo</span><span class="tl-client-tag">DiscDoctor</span>
+              <span class="tl-client-tag">Tri Estate (new)</span>
             </div>
           </div>
-           <div class="stats-card card">
-            <h3>AI Tools</h3>
-            <div class="tools-icons">
-              <img src="https://brandlogos.net/wp-content/uploads/2025/04/cursor_code_editor-logo_brandlogos.net_r1yfy-512x512.png" alt="Cursor" title="Cursor"/>
-              <img src="https://freelogopng.com/images/all_img/1681039084chatgpt-icon.png" alt="ChatGPT" title="ChatGPT"/>
-              <img src="https://upload.wikimedia.org/wikipedia/commons/5/58/Claude-ai-icon.svg" alt="Claude" title="Claude"/>
-              <img src="https://brandlogos.net/wp-content/uploads/2025/12/google_antigravity-logo_brandlogos.net_qu4jc-512x472.png" alt="Anti-Gravity" title="Anti-Gravity"/>
-              
+        </div>
+
+        <div class="timeline-item">
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <div class="tl-header">
+              <span class="tl-role">AI & CRM Automation Specialist</span>
+              <span class="tl-period">Ongoing</span>
             </div>
-          </div>
-        <div class="stats-card card">
-          <h3>Most Used Languages</h3>
-          <div class="languages-icons">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" title="Python"/>
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" title="Java"/>
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#" title="C#"/>
-            <img src="https://logodix.com/logo/426485.png" alt="Lua" title="Lua"/>
-          </div>
-        </div>
-      </section>
-      <section class="profile-pinned">
-        <div class="pinned-card card">
-          <h4>Projects<span class="project-count">20+</span></h4>
-          <p>⭐ Speechy Pop - A speech recognition app</p>
-          <div class="project-tools-icons">
-            <img src="https://www.citypng.com/public/uploads/preview/unity-round-logo-icon-png-701751694968144ebvvjhn8zq.png" alt="Unity" title="Unity" />
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#" title="C#"/>
-            <img src="https://www.freepnglogos.com/uploads/wordpress-logo-png/wordpress-logo-png-transparent-wordpress-logo-images-pluspng-6.png" alt="Wordpress" title="Wordpress"/>
-            <img src="https://framalibre.org/images/logo/XAMPP.png" alt="XAMPP" title="XAMPP"/>
-            <img src="https://as2.ftcdn.net/v2/jpg/02/50/30/59/1000_F_250305943_sDC6la1N1fDl3bLgfLxOkQwItIodsdMb.jpg" alt="GitHub" title="GitHub" title="GitHub"/>
-            <img src="https://0xdfimages.gitlab.io/img/ngrok-cover.png" alt="GitHub" title="Ngrok" title="Ngrok"/>
-            <img src="https://p1.hiclipart.com/preview/980/312/965/html-logo-css3-javascript-web-design-css-grid-layout-html5-electric-blue-symbol-png-clipart.jpg" alt="CSS" title="CSS"/>
-            <img src="https://thumbnail.imgbin.com/19/3/15/imgbin-responsive-web-design-html-logo-world-wide-web-3X8vwtEnAJS3ELSHaEkDNzqSt_t.jpg" alt="HTML" title="HTML"/>
-            <img src="https://www.freepnglogos.com/uploads/php-logo-png/php-logo-php-elephant-logo-vectors-download-5.png" alt="PHP" title="PHP"/>
-          </div>
-          <p>⭐ MIA(Missing In Action)</p>
-          <div class="project-tools-icons">
-            <img src="https://www.freepnglogos.com/uploads/php-logo-png/php-logo-php-elephant-logo-vectors-download-5.png" alt="PHP" title="PHP"/>
-            <img src="https://thumbnail.imgbin.com/19/3/15/imgbin-responsive-web-design-html-logo-world-wide-web-3X8vwtEnAJS3ELSHaEkDNzqSt_t.jpg" alt="HTML" title="HTML"/>
-            <img src="https://p1.hiclipart.com/preview/980/312/965/html-logo-css3-javascript-web-design-css-grid-layout-html5-electric-blue-symbol-png-clipart.jpg" alt="CSS" title="CSS"/>
-            <img src="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo-shadow.png" alt="BootStrap" title="BootStrap"/>
-            <img src="https://e7.pngegg.com/pngimages/747/798/png-clipart-mysql-mysql.png" alt="MYSQL" title="MYSQL"/>
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python Flask" title="Python Flask"/>
-            <img src="https://framalibre.org/images/logo/XAMPP.png" alt="XAMPP" title="XAMPP"/>
-           </div>
-          <p>⭐ 12 Week Marketing Plan</p>
-          <div class="project-tools-icons">
-            <img src="https://cdn.brandfetch.io/idK-hvK7Lv/w/200/h/200/theme/dark/icon.jpeg?c=1dxbfHSJFAPEGdCLU4o5B" alt="GoHighLevel" title="GoHighLevel"/>
-            <img src="https://cdn-1.webcatalog.io/catalog/pabbly/pabbly-icon-filled-256.png?v=1669863995747" alt="Pabbly" title="Pabbly"/>
-            <img src="https://tse3.mm.bing.net/th/id/OIP.J478-3G1gtzYD9UyHaojIQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Zapier" title="Zapier"/>
-           </div>
-          <p>⭐ AI Chatbot Telegram For Crypto</p>
-          <div class="project-tools-icons">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python Flask" title="Python Flask"/>
-            <img src="https://0xdfimages.gitlab.io/img/ngrok-cover.png" alt="GitHub" title="Ngrok" title="Ngrok"/>
-            <img src="https://tse1.mm.bing.net/th/id/OIP.TMsvEzFQMQ2ACtseyqUxRwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Telegram" title="Telegram"/>
-           </div>
-           <p>⭐ Project AnalogHorror</p>
-          <div class="project-tools-icons">
-            <img src="https://www.citypng.com/public/uploads/preview/unity-round-logo-icon-png-701751694968144ebvvjhn8zq.png" alt="Unity" title="Unity" />
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#" title="C#"/>
-           </div>
-            <p>⭐ PetHealth</p>
-          <div class="project-tools-icons">
-            <img src="https://logonoid.com/images/android-studio-logo.png" alt="Android Studio" title="Android Studio" />
-            <img src="https://www.liblogo.com/img-logo/no6273n057-node-js-logo-nodejs-transparent-logo-google-search.png" alt="Node.js" title="Node.js"/>
-            <img src="https://masteringjs.io/assets/images/vue/vue-transparent.png" alt="Vue" title="Vue" />
-            <img src="https://static.vecteezy.com/system/resources/previews/022/227/351/original/openai-chatgpt-logo-icon-free-png.png" alt="Open AI api key" title="Open AI api key" />
-          </div>
-
-        </div>
-       <!-- <div class="pinned-card card">
-          <h4>portfolio</h4>
-          <p>📝 My personal portfolio website.</p>
-          <span class="repo-lang">athr1tis.github.io/ImCir.github.io</span>
-        </div>-->
-       <div class="pinned-card card">
-        <h4>open-source-lib</h4>
-        <p>🔀 Useful open source library for devs.</p>
-        <p>⭐ Funnelytics automations</p> 
-  <p>
-    🔗 <a href="" onclick="trackClick('Funnelytics-automations')" class="project-link">
-      Google Drive Link <span class="click-count">(visited: <span id="Funnelytics-automations-count">0</span> times)</span>
-    </a>
-  </p>
-  <p>⭐ MarketCapcoin Webscrapper python Seleniun</p> 
-  <p>
-    🔗 <a href="" onclick="trackClick('MarketCapcoin-Webscrapper-python-Seleniun')" class="project-link">
-      Google Drive Link <span class="click-count">(visited: <span id="MarketCapcoin-Webscrapper-python-Seleniun-count">0</span> times)</span>
-    </a>
-  </p>
-  <p>⭐  n8n Automations</p> 
-  <p>
-    🔗 <a href="" onclick="trackClick('n8n-Automations')" class="project-link">
-      Google Drive Link <span class="click-count">(visited: <span id="n8n-Automations-count">0</span> times)</span>
-    </a>
-  </p>
-</p> 
-  <p>⭐  Roblox game sink in</p> 
-  <p>
-    🔗 <a href="" onclick="trackClick('Roblox-game-sink-in')" class="project-link">
-      Google Drive Link <span class="click-count">(visited: <span id="Roblox-game-sink-in-count">0</span> times)</span>
-    </a>
-  </p> 
-  </p>
-    <p>⭐  Wordpress leads form to GHL leads using Zapier</p> 
-  <p>
-    🔗 <a href="" onclick="trackClick('Wordpress-leads-form-to-GHL-leads-using-Zapier')" class="project-link">
-      Google Drive Link <span class="click-count">(visited: <span id="Wordpress-leads-form-to-GHL-leads-using-Zapier-count">0</span> times)</span>
-    </a>
-  </p> 
-  </p>
-        </div>
-      
-      </section>
-     <!-- <section class="profile-activity card">
-        <h3>Recent Activity</h3>
-        <ul>
-          <li>⭐ Starred <b>awesome-project</b></li>
-          <li>📝 Updated <b>portfolio</b> repository</li>
-          <li>🔀 Merged PR in <b>open-source-lib</b></li>
-        </ul>
-      </section>-->
-     <!-- <section class="profile-contributions card">
-        <h3>GitHub Contributions</h3>
-        <img src="https://ghchart.rshah.org/583231" alt="GitHub chart" style="width:100%;max-width:600px;"/>
-      </section>-->
-      <center><p>&copy; 2024 Rica Cadavis. All rights reserved. | Built with ❤️ and ☕</p></center>
-    </main>
-  </div>
-  <div id="avatar-modal" class="avatar-modal" style="display:none;">
-    <div class="avatar-modal-content">
-      <span class="avatar-modal-close" onclick="closeAvatarModal()">&times;</span>
-      <img src="mypic.png" alt="Avatar Large" class="avatar-large">
-      <p class="avatar-desc">Hi, I'm Rica Cadavis! I'm a passionate Full-Stack Developer | Automation Engineer | AI Integrations Specialist developer from PH.<br> I help businesses automate operations, integrate APIs, and build scalable custom web applications. From full-stack SaaS platforms and <br> AI chatbots to CRM automations and workflow systems, I deliver fast, efficient, and reliable solutions using modern technologies<br> like  React, Node.js, Python, n8n, OpenAI, and GoHighLevel.<br> I also work with third-party tools, webhooks, and external APIs to create seamless end-to-end business solutions.</p>
-      
-      <!-- Mobile-only sections -->
-      <div class="mobile-sections">
-        <!-- Contact Information -->
-        <div class="mobile-section">
-          <h4>📧 Contact</h4>
-          <div class="mobile-contact-info">
-            <div class="mobile-contact-line">rica.cadavis12@gmail.com</div>
-            <div class="mobile-contact-line">📱 09913028862</div>
-            <div class="mobile-contact-line">📍 Philippines</div>
+            <div class="tl-company">Marvelous Strategies · Victus Global · Valour Strategies · InjectCo · DiscDoctor · Tri Estate</div>
+            <ul class="tl-bullets">
+              <li>Designed n8n and Make.com workflows with complex conditional logic built on real programming fundamentals — not just drag-and-drop configuration.</li>
+              <li>Integrated OpenAI API, Prospyr GraphQL, GoHighLevel, and Twilio into production systems with proper error handling, UUID formatting, and data validation.</li>
+              <li>Built CRM dashboards, booking automations, and KPI reporting pipelines across multiple clients — all still running reliably in production today.</li>
+              <li>Applied database design knowledge (MySQL, relational models) to architect durable, scalable data flows between platforms and services.</li>
+              <li>Took full ownership of each client's technical environment — credentials, configurations, and deployments — earning long-term trust across every engagement.</li>
+            </ul>
           </div>
         </div>
 
-        <!-- Education -->
-        <div class="mobile-section">
-          <h4>🎓 Education</h4>
-          <div class="mobile-education-info">
-            <div class="mobile-education-year">2020-2024</div>
-            <div class="mobile-education-school">ACLC College</div>
-            <div class="mobile-education-degree">BS Information Technology</div>
-            <div class="mobile-education-award">🏆 Best in Capstone</div>
+      </div>
+    </section>
+
+    <!-- TOOLS -->
+    <section class="card">
+      <h3 class="section-title">Tools & Stack</h3>
+      <div class="tools-grid">
+        <div class="tool-group">
+          <div class="tool-group-label">Automation & Integration</div>
+          <div class="tool-icons">
+            <img src="https://vectorseek.com/wp-content/uploads/2025/07/N8n-Ai-Logo-PNG-SVG-Vector.png" title="n8n" alt="n8n">
+            <img src="https://images.ctfassets.net/un655fb9wln6/1k5wBPhbu5kXiaYlFWgEJE/b590772959bd510e64cf230ef37bba3e/Make-Logo-RGB.svg" title="Make" alt="Make">
+            <img src="https://images.seeklogo.com/logo-png/27/1/zapier-logo-png_seeklogo-274108.png" title="Zapier" alt="Zapier">
+            <img src="https://cdn.brandfetch.io/idK-hvK7Lv/w/200/h/200/theme/dark/icon.jpeg?c=1dxbfHSJFAPEGdCLU4o5B" title="GoHighLevel" alt="GoHighLevel">
+            <img src="https://cdn-1.webcatalog.io/catalog/pabbly/pabbly-icon-filled-256.png?v=1669863995747" title="Pabbly" alt="Pabbly">
+          </div>
+        </div>
+        <div class="tool-group">
+          <div class="tool-group-label">Dev Tools</div>
+          <div class="tool-icons">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" title="VS Code" alt="VS Code">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" title="Git" alt="Git">
+            <img src="https://brandlogos.net/wp-content/uploads/2025/04/cursor_code_editor-logo_brandlogos.net_r1yfy-512x512.png" title="Cursor" alt="Cursor">
+            <img src="https://as2.ftcdn.net/v2/jpg/02/50/30/59/1000_F_250305943_sDC6la1N1fDl3bLgfLxOkQwItIodsdMb.jpg" title="GitHub" alt="GitHub">
+            <img src="https://logonoid.com/images/android-studio-logo.png" title="Android Studio" alt="Android Studio">
+            <img src="https://tse2.mm.bing.net/th/id/OIP.7Hpz0RHbNXJUPXNKuSHOtwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" title="Roblox Studio" alt="Roblox Studio">
+          </div>
+        </div>
+        <div class="tool-group">
+          <div class="tool-group-label">AI Tools</div>
+          <div class="tool-icons">
+            <img src="https://freelogopng.com/images/all_img/1681039084chatgpt-icon.png" title="ChatGPT" alt="ChatGPT">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/58/Claude-ai-icon.svg" title="Claude" alt="Claude">
+            <img src="https://brandlogos.net/wp-content/uploads/2025/04/cursor_code_editor-logo_brandlogos.net_r1yfy-512x512.png" title="Cursor AI" alt="Cursor AI">
+            <img src="https://brandlogos.net/wp-content/uploads/2025/12/google_antigravity-logo_brandlogos.net_qu4jc-512x472.png" title="Google AntiGravity" alt="AntiGravity">
+          </div>
+        </div>
+        <div class="tool-group">
+          <div class="tool-group-label">Content & Design</div>
+          <div class="tool-icons">
+            <img src="https://www.pngmart.com/files/23/Blender-Logo-Transparent-PNG.png" title="Blender" alt="Blender">
+            <img src="https://gpng.net/wp-content/uploads/Capcut-Logo-Png-Icon-Free.png" title="CapCut" alt="CapCut">
+            <img src="https://www.citypng.com/public/uploads/preview/unity-round-logo-icon-png-701751694968144ebvvjhn8zq.png" title="Unity" alt="Unity">
+            <img src="https://www.freepnglogos.com/uploads/wordpress-logo-png/wordpress-logo-png-transparent-wordpress-logo-images-pluspng-6.png" title="WordPress" alt="WordPress">
+          </div>
+        </div>
+        <div class="tool-group">
+          <div class="tool-group-label">Other Related Tools</div>
+          <div class="tool-icons">
+            <img src="https://saasboltons.com/wp-content/uploads/listing-uploads/logo/2023/10/Untitled-design-1.gif" title="Closebot" alt="Closebot">
+            <img src="https://cdn.imgbin.com/1/3/11/imgbin-ren-py-visual-novel-computer-icons-doki-doki-literature-club-video-game-others-2rnugN7PDSe4rLsPNmrCeM9iu.jpg" title="Ren'Py" alt="Ren'Py">
+          </div>
+        </div>
+        <div class="tool-group">
+          <div class="tool-group-label">Most Used Languages</div>
+          <div class="tool-icons">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" title="Python" alt="Python">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" title="Java" alt="Java">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" title="C#" alt="C#">
+            <img src="https://logodix.com/logo/426485.png" title="Lua" alt="Lua">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS single column -->
+    <section class="card">
+      <h3 class="section-title">Projects <span class="count-badge">20+</span></h3>
+      <div class="projects-list">
+
+        <div class="project-card">
+          <div class="proj-header"><span class="proj-star">★</span><span class="proj-name">Speechy Pop</span></div>
+          <p class="proj-desc">Speech recognition app built with Unity and C#, with PHP/MySQL backend hosted via XAMPP and Ngrok. Capstone project — awarded Best in Capstone at ACLC College.</p>
+          <div class="proj-tags">
+            <img src="https://www.citypng.com/public/uploads/preview/unity-round-logo-icon-png-701751694968144ebvvjhn8zq.png" title="Unity" alt="Unity">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" title="C#" alt="C#">
+            <img src="https://www.freepnglogos.com/uploads/php-logo-png/php-logo-php-elephant-logo-vectors-download-5.png" title="PHP" alt="PHP">
+            <img src="https://e7.pngegg.com/pngimages/747/798/png-clipart-mysql-mysql.png" title="MySQL" alt="MySQL">
           </div>
         </div>
 
-        <!-- Languages -->
-        <div class="mobile-section">
-          <h4>🌐 Languages</h4>
-          <div class="mobile-language-list">
-            <span class="mobile-lang-item">English</span>
-            <span class="mobile-lang-item">Bisaya</span>
-            <span class="mobile-lang-item">Tagalog</span>
+        <div class="project-card">
+          <div class="proj-header"><span class="proj-star">★</span><span class="proj-name">MIA (Missing In Action)</span></div>
+          <p class="proj-desc">Web app with Python/Flask backend, Bootstrap frontend, and MySQL database — full CRUD with authentication. Clean architecture with proper session management and relational data design.</p>
+          <div class="proj-tags">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" title="Python Flask" alt="Python">
+            <img src="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo-shadow.png" title="Bootstrap" alt="Bootstrap">
+            <img src="https://e7.pngegg.com/pngimages/747/798/png-clipart-mysql-mysql.png" title="MySQL" alt="MySQL">
+            <img src="https://thumbnail.imgbin.com/19/3/15/imgbin-responsive-web-design-html-logo-world-wide-web-3X8vwtEnAJS3ELSHaEkDNzqSt_t.jpg" title="HTML" alt="HTML">
           </div>
+        </div>
+
+        <div class="project-card">
+          <div class="proj-header"><span class="proj-star">★</span><span class="proj-name">12 Week Marketing Plan</span></div>
+          <p class="proj-desc">End-to-end CRM automation for a full marketing funnel — GoHighLevel pipelines, Pabbly sequences, and Zapier integrations working as a single cohesive system. Still running in production.</p>
+          <div class="proj-tags">
+            <img src="https://cdn.brandfetch.io/idK-hvK7Lv/w/200/h/200/theme/dark/icon.jpeg?c=1dxbfHSJFAPEGdCLU4o5B" title="GoHighLevel" alt="GHL">
+            <img src="https://cdn-1.webcatalog.io/catalog/pabbly/pabbly-icon-filled-256.png?v=1669863995747" title="Pabbly" alt="Pabbly">
+            <img src="https://images.seeklogo.com/logo-png/27/1/zapier-logo-png_seeklogo-274108.png" title="Zapier" alt="Zapier">
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="proj-header"><span class="proj-star">★</span><span class="proj-name">AI Chatbot for Crypto (Telegram)</span></div>
+          <p class="proj-desc">Python-powered Telegram bot integrated with live crypto data via API, deployed via Ngrok tunnel for real-time responses. Handles user queries, market lookups, and alert notifications autonomously.</p>
+          <div class="proj-tags">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" title="Python" alt="Python">
+            <img src="https://tse1.mm.bing.net/th/id/OIP.TMsvEzFQMQ2ACtseyqUxRwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" title="Telegram" alt="Telegram">
+            <img src="https://0xdfimages.gitlab.io/img/ngrok-cover.png" title="Ngrok" alt="Ngrok">
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="proj-header"><span class="proj-star">★</span><span class="proj-name">Project AnalogHorror</span></div>
+          <p class="proj-desc">Atmospheric Unity/C# game with analog horror visual design, custom runtime UI systems, and carefully crafted tension-building mechanics. A personal creative project showcasing depth in game design.</p>
+          <div class="proj-tags">
+            <img src="https://www.citypng.com/public/uploads/preview/unity-round-logo-icon-png-701751694968144ebvvjhn8zq.png" title="Unity" alt="Unity">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" title="C#" alt="C#">
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="proj-header"><span class="proj-star">★</span><span class="proj-name">PetHealth</span></div>
+          <p class="proj-desc">Android app (Vue + Node.js) with OpenAI API integration for AI-powered pet health guidance and tracking. Features symptom assessment, health logging, and intelligent care recommendations.</p>
+          <div class="proj-tags">
+            <img src="https://logonoid.com/images/android-studio-logo.png" title="Android Studio" alt="Android Studio">
+            <img src="https://masteringjs.io/assets/images/vue/vue-transparent.png" title="Vue" alt="Vue">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" title="Node.js" alt="Node.js">
+            <img src="https://static.vecteezy.com/system/resources/previews/022/227/351/original/openai-chatgpt-logo-icon-free-png.png" title="OpenAI" alt="OpenAI">
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- OPEN SOURCE -->
+    <section class="card">
+      <h3 class="section-title">Open Source Library</h3>
+      <p class="section-sub">Useful automations and scripts shared with the dev community.</p>
+      <div class="oss-list">
+        <div class="oss-item">
+          <span class="oss-name">Funnelytics Automations</span>
+          <a href="" onclick="trackClick('Funnelytics-automations'); return false;" class="oss-link">Google Drive <span class="visit-count">(visited: <span id="Funnelytics-automations-count">0</span>×)</span></a>
+        </div>
+        <div class="oss-item">
+          <span class="oss-name">MarketCapCoin Webscraper (Python Selenium)</span>
+          <a href="" onclick="trackClick('MarketCapcoin-Webscrapper-python-Seleniun'); return false;" class="oss-link">Google Drive <span class="visit-count">(visited: <span id="MarketCapcoin-Webscrapper-python-Seleniun-count">0</span>×)</span></a>
+        </div>
+        <div class="oss-item">
+          <span class="oss-name">n8n Automations</span>
+          <a href="" onclick="trackClick('n8n-Automations'); return false;" class="oss-link">Google Drive <span class="visit-count">(visited: <span id="n8n-Automations-count">0</span>×)</span></a>
+        </div>
+        <div class="oss-item">
+          <span class="oss-name">Roblox Game Sink In</span>
+          <a href="" onclick="trackClick('Roblox-game-sink-in'); return false;" class="oss-link">Google Drive <span class="visit-count">(visited: <span id="Roblox-game-sink-in-count">0</span>×)</span></a>
+        </div>
+        <div class="oss-item">
+          <span class="oss-name">WordPress Leads → GHL via Zapier</span>
+          <a href="" onclick="trackClick('Wordpress-leads-form-to-GHL-leads-using-Zapier'); return false;" class="oss-link">Google Drive <span class="visit-count">(visited: <span id="Wordpress-leads-form-to-GHL-leads-using-Zapier-count">0</span>×)</span></a>
+        </div>
+      </div>
+    </section>
+
+    <footer>© 2025 Rica Cadavis · All rights reserved · Built with ❤️ and ☕</footer>
+  </main>
+</div>
+
+<!-- MODAL -->
+<div id="avatar-modal" class="modal-overlay" style="display:none;" onclick="if(event.target===this)closeAvatarModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeAvatarModal()">×</button>
+    <img src="mypic.png" alt="Rica Cadavis" class="modal-avatar">
+    <h2 class="modal-name">Rica Cadavis</h2>
+    <p class="modal-bio">
+      Hi, I'm Rica — a Full-Stack Developer, Automation Engineer, and AI Integrations Specialist based in Butuan City, Philippines.<br><br>
+      With 5 years of hands-on experience and 3 years as manager and lead developer at NewWine, I don't just build things — I own them. I've designed and deployed automation workflows, CRM pipelines, full-stack applications, and AI-powered systems that real businesses depend on every single day.<br><br>
+      I work with React, Node.js, Python, n8n, GoHighLevel, Make, OpenAI, and more. I manage credentials, architect databases, integrate third-party services, and solve the problems most people don't even know they have — until they break.<br><br>
+      I'm currently looking for a full-time, long-term role where I can genuinely contribute to a team's success. If you want someone dependable, technically capable, and genuinely invested in making your business run better — let's talk.
+    </p>
+    <div class="modal-mobile-info">
+      <div class="modal-info-section">
+        <h4>Contact</h4>
+        <p>rica.cadavis12@gmail.com</p>
+        <p>📱 09913028862</p>
+      </div>
+      <div class="modal-info-section">
+        <h4>Education</h4>
+        <p><strong>ACLC College</strong> · 2020–2024<br>BS Information Technology · 🏆 Best in Capstone</p>
+      </div>
+      <div class="modal-info-section">
+        <h4>Languages</h4>
+        <div class="tag-row">
+          <span class="tag">English</span><span class="tag">Bisaya</span><span class="tag">Tagalog</span>
         </div>
       </div>
     </div>
   </div>
+</div>
 
+<!-- VISIT WIDGET -->
+<div id="visitcounts-display" class="vc-widget">
+  <div class="vc-title">📊 Open Source Visits</div>
+  <div class="vc-row">Funnelytics: <span id="vc-Funnelytics-automations">0</span></div>
+  <div class="vc-row">MarketCapCoin: <span id="vc-MarketCapcoin-Webscrapper-python-Seleniun">0</span></div>
+  <div class="vc-row">n8n Automations: <span id="vc-n8n-Automations">0</span></div>
+  <div class="vc-row">Roblox: <span id="vc-Roblox-game-sink-in">0</span></div>
+  <div class="vc-row">WP→GHL: <span id="vc-Wordpress-leads-form-to-GHL-leads-using-Zapier">0</span></div>
+  <div class="vc-note">Updates sync via GitHub Actions</div>
+</div>
 
-  <script>
-    // Store visit counts in hidden input fields in the HTML
-    let visitCounts = {
-      'Funnelytics-automations': 0,
-      'MarketCapcoin-Webscrapper-python-Seleniun': 0,
-      'n8n-Automations': 0,
-      'Roblox-game-sink-in': 0,
-      'Wordpress-leads-form-to-GHL-leads-using-Zapier': 0,
-    };
+<input type="hidden" id="Funnelytics-automations-storage" value="0">
+<input type="hidden" id="MarketCapcoin-Webscrapper-python-Seleniun-storage" value="0">
+<input type="hidden" id="n8n-Automations-storage" value="0">
+<input type="hidden" id="Roblox-game-sink-in-storage" value="0">
+<input type="hidden" id="Wordpress-leads-form-to-GHL-leads-using-Zapier-storage" value="0">
 
-    // GitHub API configuration for dynamic updates
-    const GITHUB_CONFIG = {
-      owner: 'ImCir', // Your GitHub username
-      repo: 'ImCir.github.io', // Your repository name
-      branch: 'main', // Your default branch
-      filePath: 'visitcounts' // The file to update
-    };
-
-    // Load counts from HTML hidden fields when page loads
-    function loadCountsFromHTML() {
-      const projects = ['Funnelytics-automations', 'MarketCapcoin-Webscrapper-python-Seleniun', 'Roblox-game-sink-in', 'Wordpress-leads-form-to-GHL-leads-using-Zapier'];
-      projects.forEach(project => {
-        // Get the initial count from the HTML hidden field
-        const storageElement = document.getElementById(`${project}-storage`);
-        if (storageElement) {
-          visitCounts[project] = parseInt(storageElement.value) || 0;
-        }
-        
-        // Update all display elements
-        const countElement = document.getElementById(`${project}-count`);
-        const displayElement = document.getElementById(`${project}-display`);
-        
-        if (countElement) {
-          countElement.textContent = visitCounts[project];
-        }
-        if (displayElement) {
-          displayElement.textContent = visitCounts[project];
-        }
-      });
-    }
-
-    function openAvatarModal() {
-      document.getElementById('avatar-modal').style.display = 'flex';
-      
-      // Hide the dynamic database panel on mobile
-      const visitCountsDisplay = document.getElementById('visitcounts-display');
-      if (visitCountsDisplay) {
-        visitCountsDisplay.style.display = 'none';
-      }
-    }
-    
-    function closeAvatarModal() {
-      document.getElementById('avatar-modal').style.display = 'none';
-      
-      // Show the dynamic database panel again on mobile
-      const visitCountsDisplay = document.getElementById('visitcounts-display');
-      if (visitCountsDisplay) {
-        visitCountsDisplay.style.display = 'block';
-      }
-    }
-    // Optional: Close modal when clicking outside content
-    window.onclick = function(event) {
-      var modal = document.getElementById('avatar-modal');
-      if (event.target === modal) {
-        closeAvatarModal();
-      }
-    }
-
-    // Dynamic click tracking with GitHub integration
-    async function trackClick(projectName) {
-      // Increment ONLY the clicked project count
-      visitCounts[projectName]++;
-      
-      // Update the display for ONLY the clicked project
-      const clickCountElement = document.getElementById(`${projectName}-count`);
-      const displayElement = document.getElementById(`${projectName}-display`);
-      const storageElement = document.getElementById(`${projectName}-storage`);
-
-      if (clickCountElement) {
-        clickCountElement.textContent = visitCounts[projectName];
-      }
-      if (displayElement) {
-        displayElement.textContent = visitCounts[projectName];
-      }
-      if (storageElement) {
-        storageElement.value = visitCounts[projectName];
-      }
-      
-      // Store in localStorage as backup
-      localStorage.setItem(projectName, visitCounts[projectName]);
-      
-      // Update the visitcounts display to show the "database" is updated
-      updateVisitCountsDisplay();
-      
-      // Try to update GitHub file dynamically
-      try {
-        await updateGitHubFile(projectName, visitCounts[projectName]);
-      } catch (error) {
-        console.log('GitHub update failed, using local storage:', error.message);
-      }
-      
-      console.log(`${projectName} clicked! New count: ${visitCounts[projectName]}`);
-    }
-
-    // Update GitHub file through API (requires GitHub token)
-    async function updateGitHubFile(projectName, newCount) {
-      // This would require a GitHub token and proper authentication
-      // For now, we'll create a system that can work with GitHub Actions
-      
-      // Store the update request in localStorage for GitHub Actions to pick up
-      const updates = JSON.parse(localStorage.getItem('githubUpdates') || '[]');
-      updates.push({
-        project: projectName,
-        count: newCount,
-        timestamp: new Date().toISOString(),
-        action: 'increment'
-      });
-      
-      // Keep only last 10 updates to avoid localStorage overflow
-      if (updates.length > 10) {
-        updates.shift();
-      }
-      
-      localStorage.setItem('githubUpdates', JSON.stringify(updates));
-      
-      // Show user that update is queued
-      showUpdateNotification(`${projectName} count updated! Queued for GitHub sync.`);
-    }
-
-    // Show update notification
-    function showUpdateNotification(message) {
-      const notification = document.createElement('div');
-      notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: #10b981;
-        color: white;
-        padding: 12px 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        z-index: 10000;
-        font-size: 14px;
-        font-weight: 500;
-        animation: slideIn 0.3s ease;
-      `;
-      notification.textContent = message;
-      
-      // Add CSS animation
-      const style = document.createElement('style');
-      style.textContent = `
-        @keyframes slideIn {
-          from { transform: translateX(100%); opacity: 0; }
-          to { transform: translateX(0); opacity: 1; }
-        }
-      `;
-      document.head.appendChild(style);
-      
-      document.body.appendChild(notification);
-      
-      // Remove after 3 seconds
-      setTimeout(() => {
-        notification.style.animation = 'slideOut 0.3s ease';
-        setTimeout(() => notification.remove(), 300);
-      }, 3000);
-    }
-
-    // Update the visitcounts display to show current "database" state
-    function updateVisitCountsDisplay() {
-      const visitCountsDisplay = document.getElementById('visitcounts-display');
-      if (visitCountsDisplay) {
-        // Store current display state to preserve it
-        const currentDisplay = visitCountsDisplay.style.display;
-        
-        visitCountsDisplay.innerHTML = `
-          <div style="color: #61dafb; font-weight: bold; margin-bottom: 8px;">📊 Dynamic Database(Updated every 1hr)</div>
-          <div>Funnelytics-automations: ${visitCounts['Funnelytics-automations']} visits</div>
-          <div>MarketCapcoin-Webscrapper-python-Seleniun: ${visitCounts['MarketCapcoin-Webscrapper-python-Seleniun']} visits</div>
-          <div>n8n-Automationst: ${visitCounts['n8n-Automations']} visits</div>
-          <div>Roblox-game-sink-in: ${visitCounts['Roblox-game-sink-in']} visits</div>
-          <div>Wordpress-leads-form-to-GHL-leads-using-Zapier: ${visitCounts['Wordpress-leads-form-to-GHL-leads-using-Zapier']} visits</div>
-          <div style="margin-top: 8px; font-size: 10px; color: #888;">
-            🚀 Updates sync automatically via GitHub Actions
-          </div>
-        `;
-        
-        // Restore the display state
-        visitCountsDisplay.style.display = currentDisplay;
-      }
-    }
-
-    // Load counts from HTML hidden fields when page loads
-    function loadCountsFromStorage() {
-      // Always start with HTML values as the base (these are the source of truth)
-      loadCountsFromHTML();
-      
-      // Check if this is a new session by looking for a session marker
-      const sessionId = 'session_' + Date.now();
-      const currentSession = localStorage.getItem('currentSession');
-      
-      if (!currentSession) {
-        // This is a new session, clear any old localStorage data
-        localStorage.clear();
-        localStorage.setItem('currentSession', sessionId);
-        console.log('New session started, using HTML values as base');
-      } else {
-        // This is an existing session, check for additional clicks
-        const projects = ['Funnelytics-automations', 'MarketCapcoin-Webscrapper-python-Seleniun', 'n8n-Automations', 'Roblox-game-sink-in', 'Wordpress-leads-form-to-GHL-leads-using-Zapier'];
-        projects.forEach(project => {
-          const storedCount = localStorage.getItem(project);
-          if (storedCount !== null) {
-            const localCount = parseInt(storedCount);
-            const htmlCount = parseInt(document.getElementById(`${project}-storage`).value) || 0;
-            
-            // Only use localStorage if it's higher than HTML (meaning clicks happened this session)
-            if (localCount > htmlCount) {
-              visitCounts[project] = localCount;
-              
-              // Update displays
-              const countElement = document.getElementById(`${project}-count`);
-              const displayElement = document.getElementById(`${project}-display`);
-              
-              if (countElement) {
-                countElement.textContent = visitCounts[project];
-              }
-              if (displayElement) {
-                displayElement.textContent = visitCounts[project];
-              }
-            }
-          }
-        });
-      }
-      
-      // Update the visitcounts display
-      updateVisitCountsDisplay();
-    }
-
-    // Initialize counts when page loads
-    window.addEventListener('load', loadCountsFromStorage);
-
-    // Function to reset counts to HTML values (useful for testing)
-    function resetToHTMLCounts() {
-      localStorage.clear();
-      loadCountsFromHTML();
-      updateVisitCountsDisplay();
-      console.log('Counts reset to HTML values');
-    }
-
-    // Function to manually set counts (for admin use)
-    function setCount(projectName, newCount) {
-      visitCounts[projectName] = newCount;
-      
-      // Update HTML storage
-      const storageElement = document.getElementById(`${projectName}-storage`);
-      if (storageElement) {
-        storageElement.value = newCount;
-      }
-      
-      // Update displays
-      const countElement = document.getElementById(`${projectName}-count`);
-      const displayElement = document.getElementById(`${projectName}-display`);
-      
-      if (countElement) {
-        countElement.textContent = newCount;
-      }
-      if (displayElement) {
-        displayElement.textContent = newCount;
-      }
-      
-      // Update localStorage
-      localStorage.setItem(projectName, newCount);
-      
-      // Update the visitcounts display
-      updateVisitCountsDisplay();
-      
-      console.log(`${projectName} count set to ${newCount}`);
-    }
-
-    // Function to show current visitcounts file content
-    function showVisitCountsFile() {
-      const content = `# Dynamic Visit Counts System
-
-## Current Visit Counts
-- **Funnelytics-automations**: ${visitCounts['Funnelytics-automations']} visits
-- **MarketCapcoin-Webscrapper-python-Seleniun**: ${visitCounts['MarketCapcoin-Webscrapper-python-Seleniun']} visits  
-- **n8n-Automations**: ${visitCounts['n8n-Automationst']} visits
-- **Roblox-game-sink-in**: ${visitCounts['Roblox-game-sink-in']} visits
-- **Wordpress-leads-form-to-GHL-leads-using-Zapier**: ${visitCounts['Wordpress-leads-form-to-GHL-leads-using-Zapier']} visits
-
-## Last Updated
-${new Date().toLocaleString()}
-
-## System Status
-🚀 **DYNAMIC MODE ENABLED**
-- Counts update automatically via GitHub Actions
-- Real-time synchronization across all devices
-- No manual file updates required
-
-## Current Session Clicks
-- Funnelytics-automations: ${visitCounts['Funnelytics-automations']} total
-- MarketCapcoin-Webscrapper-python-Seleniun: ${visitCounts['MarketCapcoin-Webscrapper-python-Seleniun']} total  
-- n8n-Automations: ${visitCounts['n8n-Automations']} total
-- Roblox-game-sink-in: ${visitCounts['Roblox-game-sink-in']} total
-- Wordpress-leads-form-to-GHL-leads-using-Zapier: ${visitCounts['Wordpress-leads-form-to-GHL-leads-using-Zapier']} total
-
-
-## How It Works
-1. Click any project link
-2. Count increments immediately
-3. Update is queued for GitHub sync
-4. GitHub Actions automatically updates visitcounts file
-5. All devices see the updated counts`;
-
-      // Create a popup with the content
-      const popup = window.open('', '_blank', 'width=600,height=500');
-      popup.document.write(`
-        <html>
-          <head><title>Dynamic visitcounts System</title></head>
-          <body style="font-family: monospace; padding: 20px; background: #1e1e1e; color: #fff;">
-            <h2>🚀 Dynamic visitcounts System</h2>
-            <p>Your portfolio is now running in DYNAMIC MODE!</p>
-            <textarea style="width: 100%; height: 350px; background: #2d2d2d; color: #fff; border: 1px solid #555; padding: 10px; font-family: monospace;" readonly>${content}</textarea>
-            <br><br>
-            <button onclick="window.close()" style="padding: 10px 20px; background: #10b981; color: #000; border: none; border-radius: 5px; cursor: pointer;">Close</button>
-          </body>
-        </html>
-      `);
-    }
-
-    // Function to check for pending GitHub updates
-    function checkPendingUpdates() {
-      const updates = JSON.parse(localStorage.getItem('githubUpdates') || '[]');
-      if (updates.length > 0) {
-        console.log(`📋 ${updates.length} updates pending GitHub sync:`, updates);
-        return updates;
-      }
-      return [];
-    }
-
-    // Function to clear pending updates (useful for testing)
-    function clearPendingUpdates() {
-      localStorage.removeItem('githubUpdates');
-      console.log('Pending GitHub updates cleared');
-    }
-  </script>
-
-  <!-- Hidden storage for visit counts -->
-  <input type="hidden" id="Funnelytics-automations-storage" value="0">
-  <input type="hidden" id="MarketCapcoin-Webscrapper-python-Seleniun-storage" value="0">
-  <input type="hidden" id="n8n-Automations-storage" value="0">
-  <input type="hidden" id="Roblox-game-sink-in-storage" value="0">
-  <input type="hidden" id="Wordpress-leads-form-to-GHL-leads-using-Zapier-storage" value="0">
-
-  <!-- Current Visit Counts Display -->
-  <div id="visitcounts-display" style="position: fixed; bottom: 20px; right: 20px; background: rgba(35, 39, 47, 0.9); padding: 15px; border-radius: 10px; border: 1px solid #61dafb; font-size: 12px; color: #e4e4e7; z-index: 1000; max-width: 200px;">
-    <div style="color: #61dafb; font-weight: bold; margin-bottom: 8px;">📊 Current Visit Counts(Updated every 1hr)</div>
-    <div>Funnelytics automations: <span id="Funnelytics-automations-display">0</span></div>
-    <div>MarketCapcoin Webscrapper python Seleniun: <span id="MarketCapcoin-Webscrapper-python-Seleniun-display">0</span></div>
-    <div>n8n Automations: <span id="n8n-Automations-display">0</span></div>
-    <div>Roblox game sink in: <span id="Roblox-game-sink-in-display">0</span></div>
-    <div>Wordpress leads form to GHL leads using Zapier: <span id="Wordpress-leads-form-to-GHL-leads-using-Zapier-display">0</span></div>
-    <div style="margin-top: 10px; text-align: center;">
-      <button onclick="showVisitCountsFile()" style="background: #61dafb; color: #000; border: none; padding: 5px 10px; border-radius: 5px; font-size: 10px; cursor: pointer; width: 100%;">
-        📄 View visitcounts File
-      </button>
-    </div>
-  </div>
-
-  <!-- music bg -->
-<audio id="bg-music" autoplay loop>
-  <!-- music bg  <source src="PeaceFrog.mp3" type="audio/mpeg">-->
-</audio>
+<audio id="bg-music" loop></audio>
 
 <script>
-  // Handle autoplay policy (browsers block autoplay without user interaction)
+  const PROJECTS = ['Funnelytics-automations','MarketCapcoin-Webscrapper-python-Seleniun','n8n-Automations','Roblox-game-sink-in','Wordpress-leads-form-to-GHL-leads-using-Zapier'];
+  let visitCounts = {};
+  PROJECTS.forEach(p => { visitCounts[p] = 0; });
+  function loadCounts() {
+    PROJECTS.forEach(p => {
+      const stored = localStorage.getItem(p);
+      const htmlVal = parseInt(document.getElementById(p+'-storage')?.value) || 0;
+      visitCounts[p] = stored ? Math.max(parseInt(stored), htmlVal) : htmlVal;
+      updateCountDisplay(p);
+    });
+  }
+  function updateCountDisplay(p) {
+    const v = visitCounts[p];
+    const el1 = document.getElementById(p+'-count');
+    const el2 = document.getElementById('vc-'+p);
+    if (el1) el1.textContent = v;
+    if (el2) el2.textContent = v;
+  }
+  function trackClick(p) {
+    visitCounts[p]++;
+    localStorage.setItem(p, visitCounts[p]);
+    updateCountDisplay(p);
+    showToast('Visit recorded!');
+  }
+  function showToast(msg) {
+    const t = document.createElement('div');
+    t.className = 'toast'; t.textContent = msg;
+    document.body.appendChild(t);
+    setTimeout(() => t.classList.add('toast-show'), 10);
+    setTimeout(() => { t.classList.remove('toast-show'); setTimeout(() => t.remove(), 300); }, 2500);
+  }
+  function openAvatarModal() { document.getElementById('avatar-modal').style.display = 'flex'; }
+  function closeAvatarModal() { document.getElementById('avatar-modal').style.display = 'none'; }
+  window.addEventListener('load', loadCounts);
   const audio = document.getElementById('bg-music');
-  audio.volume = 0.3; // Set volume (0.0 to 1.0)
-
-  // Try to play immediately
-  audio.play().catch(() => {
-    // If blocked, play on first user interaction
-    document.addEventListener('click', () => {
-      audio.play();
-    }, { once: true });
-  });
+  audio.volume = 0.3;
+  audio.play().catch(() => { document.addEventListener('click', () => audio.play(), { once: true }); });
 </script>
-
-
 </body>
 </html>
