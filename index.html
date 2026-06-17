@@ -73,9 +73,9 @@
     .count-badge { background: var(--accent-dim); color: var(--accent); font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 99px; }
 
     /* HIRING BANNER */
-    .hiring-banner { background: linear-gradient(135deg, rgba(97,218,251,0.08) 0%, rgba(74,222,128,0.06) 100%); border: 1px solid rgba(97,218,251,0.3); border-radius: var(--radius-lg); padding: 28px 32px; display: flex; flex-direction: column; gap: 14px; position: relative; overflow: hidden; }
-    .hiring-banner::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--green)); }
-    .hiring-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(74,222,128,0.15); border: 1px solid rgba(74,222,128,0.3); color: var(--green); font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 12px; border-radius: 99px; width: fit-content; }
+    .hiring-banner { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px 32px; display: flex; flex-direction: column; gap: 14px; transition: border-color var(--transition); }
+    .hiring-banner:hover { border-color: rgba(255,255,255,0.1); }
+    .hiring-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--accent-dim); border: 1px solid rgba(97,218,251,0.2); color: var(--accent); font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 12px; border-radius: 99px; width: fit-content; }
     .hiring-badge::before { content: '●'; font-size: 0.6rem; animation: pulse 2s infinite; }
     @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
     .hiring-banner h3 { font-size: 1.15rem; font-weight: 800; color: var(--text-primary); line-height: 1.3; }
@@ -128,13 +128,13 @@
     .proj-tags img:hover { transform: scale(1.15); }
 
     /* OSS */
-    .oss-list { display: flex; flex-direction: column; gap: 4px; }
-    .oss-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 11px 14px; border-radius: var(--radius-sm); border: 1px solid transparent; transition: background var(--transition), border-color var(--transition); }
-    .oss-item:hover { background: var(--accent-dim); border-color: rgba(97,218,251,0.15); }
-    .oss-name { font-size: 0.85rem; color: var(--text-primary); }
-    .oss-link { font-size: 0.78rem; color: var(--accent); white-space: nowrap; display: flex; align-items: center; gap: 6px; padding: 4px 10px; border: 1px solid rgba(97,218,251,0.2); border-radius: var(--radius-sm); background: var(--accent-dim); transition: background var(--transition); }
+    .oss-list { display: flex; flex-direction: column; gap: 10px; }
+    .oss-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--surface-alt); transition: border-color var(--transition), transform var(--transition); }
+    .oss-item:hover { border-color: var(--border-hover); transform: translateX(4px); }
+    .oss-name { font-size: 0.85rem; font-weight: 600; color: var(--text-primary); }
+    .oss-link { font-size: 0.78rem; color: var(--accent); white-space: nowrap; display: flex; align-items: center; gap: 6px; padding: 6px 12px; border: 1px solid rgba(97,218,251,0.2); border-radius: var(--radius-sm); background: var(--accent-dim); font-weight: 600; transition: background var(--transition); }
     .oss-link:hover { background: rgba(97,218,251,0.2); text-decoration: none; }
-    .visit-count { color: var(--text-muted); font-size: 0.72rem; }
+    .visit-count { color: var(--text-muted); font-size: 0.72rem; font-weight: 400; }
 
     footer { text-align: center; font-size: 0.78rem; color: var(--text-muted); padding: 8px 0 16px; }
 
@@ -153,7 +153,7 @@
     .modal-info-section p { font-size: 0.82rem; color: var(--text-secondary); }
 
     /* VISIT WIDGET */
-    .vc-widget { position: fixed; bottom: 20px; right: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 14px 16px; font-size: 0.75rem; color: var(--text-secondary); z-index: 500; max-width: 210px; box-shadow: 0 4px 24px rgba(0,0,0,0.4); }
+    .vc-widget { display: none; }
     .vc-title { color: var(--accent); font-weight: 700; margin-bottom: 8px; font-size: 0.78rem; }
     .vc-row { margin-bottom: 2px; }
     .vc-row span { color: var(--accent); font-weight: 600; }
@@ -215,7 +215,7 @@
       </div>
     </div>
     <div class="sidebar-social">
-      <a href="https://www.facebook.com/profile.php?id=61577640009622" target="_blank" rel="noopener" title="Facebook">
+      <a href="https://www.facebook.com/cir24" target="_blank" rel="noopener" title="Facebook">
         <img src="fb-icon.svg" alt="Facebook">
       </a>
     </div>
@@ -277,8 +277,8 @@
         <span class="hiring-chip">System Architecture</span>
       </div>
       <div class="hiring-cta">
-        <a href="mailto:rica.cadavis12@gmail.com" class="btn-primary">📩 Contact Me Directly</a>
-        <a href="https://www.facebook.com/profile.php?id=61577640009622" target="_blank" class="btn-secondary">Connect on Facebook</a>
+        <a href="https://www.facebook.com/cir24" class="btn-primary">📩 Contact Me Directly</a>
+        <a href="https://www.facebook.com/cir24" target="_blank" class="btn-secondary">Connect on Facebook</a>
       </div>
     </section>
 
@@ -354,7 +354,7 @@
           <div class="tool-icons">
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" title="VS Code" alt="VS Code">
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" title="Git" alt="Git">
-            <img src="https://brandlogos.net/wp-content/uploads/2025/04/cursor_code_editor-logo_brandlogos.net_r1yfy-512x512.png" title="Cursor" alt="Cursor">
+            <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/cursor-ai-code-icon.png" title="Cursor" alt="Cursor">
             <img src="https://as2.ftcdn.net/v2/jpg/02/50/30/59/1000_F_250305943_sDC6la1N1fDl3bLgfLxOkQwItIodsdMb.jpg" title="GitHub" alt="GitHub">
             <img src="https://logonoid.com/images/android-studio-logo.png" title="Android Studio" alt="Android Studio">
             <img src="https://tse2.mm.bing.net/th/id/OIP.7Hpz0RHbNXJUPXNKuSHOtwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" title="Roblox Studio" alt="Roblox Studio">
@@ -365,8 +365,8 @@
           <div class="tool-icons">
             <img src="https://freelogopng.com/images/all_img/1681039084chatgpt-icon.png" title="ChatGPT" alt="ChatGPT">
             <img src="https://upload.wikimedia.org/wikipedia/commons/5/58/Claude-ai-icon.svg" title="Claude" alt="Claude">
-            <img src="https://brandlogos.net/wp-content/uploads/2025/04/cursor_code_editor-logo_brandlogos.net_r1yfy-512x512.png" title="Cursor AI" alt="Cursor AI">
-            <img src="https://brandlogos.net/wp-content/uploads/2025/12/google_antigravity-logo_brandlogos.net_qu4jc-512x472.png" title="Google AntiGravity" alt="AntiGravity">
+            <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/cursor-ai-code-icon.png" title="Cursor AI" alt="Cursor AI">
+            <img src="https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/light/antigravity-color.png" title="Google AntiGravity" alt="AntiGravity">
           </div>
         </div>
         <div class="tool-group">
@@ -467,34 +467,6 @@
       </div>
     </section>
 
-    <!-- OPEN SOURCE -->
-    <section class="card">
-      <h3 class="section-title">Open Source Library</h3>
-      <p class="section-sub">Useful automations and scripts shared with the dev community.</p>
-      <div class="oss-list">
-        <div class="oss-item">
-          <span class="oss-name">Funnelytics Automations</span>
-          <a href="" onclick="trackClick('Funnelytics-automations'); return false;" class="oss-link">Google Drive <span class="visit-count">(visited: <span id="Funnelytics-automations-count">0</span>×)</span></a>
-        </div>
-        <div class="oss-item">
-          <span class="oss-name">MarketCapCoin Webscraper (Python Selenium)</span>
-          <a href="" onclick="trackClick('MarketCapcoin-Webscrapper-python-Seleniun'); return false;" class="oss-link">Google Drive <span class="visit-count">(visited: <span id="MarketCapcoin-Webscrapper-python-Seleniun-count">0</span>×)</span></a>
-        </div>
-        <div class="oss-item">
-          <span class="oss-name">n8n Automations</span>
-          <a href="" onclick="trackClick('n8n-Automations'); return false;" class="oss-link">Google Drive <span class="visit-count">(visited: <span id="n8n-Automations-count">0</span>×)</span></a>
-        </div>
-        <div class="oss-item">
-          <span class="oss-name">Roblox Game Sink In</span>
-          <a href="" onclick="trackClick('Roblox-game-sink-in'); return false;" class="oss-link">Google Drive <span class="visit-count">(visited: <span id="Roblox-game-sink-in-count">0</span>×)</span></a>
-        </div>
-        <div class="oss-item">
-          <span class="oss-name">WordPress Leads → GHL via Zapier</span>
-          <a href="" onclick="trackClick('Wordpress-leads-form-to-GHL-leads-using-Zapier'); return false;" class="oss-link">Google Drive <span class="visit-count">(visited: <span id="Wordpress-leads-form-to-GHL-leads-using-Zapier-count">0</span>×)</span></a>
-        </div>
-      </div>
-    </section>
-
     <footer>© 2025 Rica Cadavis · All rights reserved · Built with ❤️ and ☕</footer>
   </main>
 </div>
@@ -531,60 +503,11 @@
   </div>
 </div>
 
-<!-- VISIT WIDGET -->
-<div id="visitcounts-display" class="vc-widget">
-  <div class="vc-title">📊 Open Source Visits</div>
-  <div class="vc-row">Funnelytics: <span id="vc-Funnelytics-automations">0</span></div>
-  <div class="vc-row">MarketCapCoin: <span id="vc-MarketCapcoin-Webscrapper-python-Seleniun">0</span></div>
-  <div class="vc-row">n8n Automations: <span id="vc-n8n-Automations">0</span></div>
-  <div class="vc-row">Roblox: <span id="vc-Roblox-game-sink-in">0</span></div>
-  <div class="vc-row">WP→GHL: <span id="vc-Wordpress-leads-form-to-GHL-leads-using-Zapier">0</span></div>
-  <div class="vc-note">Updates sync via GitHub Actions</div>
-</div>
-
-<input type="hidden" id="Funnelytics-automations-storage" value="0">
-<input type="hidden" id="MarketCapcoin-Webscrapper-python-Seleniun-storage" value="0">
-<input type="hidden" id="n8n-Automations-storage" value="0">
-<input type="hidden" id="Roblox-game-sink-in-storage" value="0">
-<input type="hidden" id="Wordpress-leads-form-to-GHL-leads-using-Zapier-storage" value="0">
-
 <audio id="bg-music" loop></audio>
 
 <script>
-  const PROJECTS = ['Funnelytics-automations','MarketCapcoin-Webscrapper-python-Seleniun','n8n-Automations','Roblox-game-sink-in','Wordpress-leads-form-to-GHL-leads-using-Zapier'];
-  let visitCounts = {};
-  PROJECTS.forEach(p => { visitCounts[p] = 0; });
-  function loadCounts() {
-    PROJECTS.forEach(p => {
-      const stored = localStorage.getItem(p);
-      const htmlVal = parseInt(document.getElementById(p+'-storage')?.value) || 0;
-      visitCounts[p] = stored ? Math.max(parseInt(stored), htmlVal) : htmlVal;
-      updateCountDisplay(p);
-    });
-  }
-  function updateCountDisplay(p) {
-    const v = visitCounts[p];
-    const el1 = document.getElementById(p+'-count');
-    const el2 = document.getElementById('vc-'+p);
-    if (el1) el1.textContent = v;
-    if (el2) el2.textContent = v;
-  }
-  function trackClick(p) {
-    visitCounts[p]++;
-    localStorage.setItem(p, visitCounts[p]);
-    updateCountDisplay(p);
-    showToast('Visit recorded!');
-  }
-  function showToast(msg) {
-    const t = document.createElement('div');
-    t.className = 'toast'; t.textContent = msg;
-    document.body.appendChild(t);
-    setTimeout(() => t.classList.add('toast-show'), 10);
-    setTimeout(() => { t.classList.remove('toast-show'); setTimeout(() => t.remove(), 300); }, 2500);
-  }
   function openAvatarModal() { document.getElementById('avatar-modal').style.display = 'flex'; }
   function closeAvatarModal() { document.getElementById('avatar-modal').style.display = 'none'; }
-  window.addEventListener('load', loadCounts);
   const audio = document.getElementById('bg-music');
   audio.volume = 0.3;
   audio.play().catch(() => { document.addEventListener('click', () => audio.play(), { once: true }); });
